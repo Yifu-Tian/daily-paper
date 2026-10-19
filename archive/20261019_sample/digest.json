@@ -1,0 +1,227 @@
+{
+  "date": "2026-10-19",
+  "overview": "【测试样刊，选材与核读日期为 2026-10-19】本期 1 篇全文精读、4 组补充资源。\nWorkhorse: Learning Robust Whole-Body Humanoid Loco-Manipulation from Human Data：论文针对双足人形机器人仅依靠胸前单目主观视点（Egocentric RGB）相机和自身本体感知（Proprioception），难以在非结构化环境中规划并执行富接触、高动态全身操作（如拦截抛掷箱子、踢踏搬运与攀爬）的难题。证据边界：真机实验仅提供定性视频范例，未报告多次重复试验的统计成功率、跌倒次数或环境泛化表现。",
+  "search_notes": "本期直接读取 10 个公开来源记录，取得 60 项论文元数据；来源为 arXiv API、GitHub 仓库搜索及配置的作者／项目页。元数据用于发现候选，精读使用实际下载的原始 PDF。社交媒体、talk、视频等仅覆盖来源实际公开的正文或链接，不代表全网监测；具体读取层级见各资源卡。",
+  "search_queries": [
+    "arXiv: (cat:cs.RO OR cat:cs.CV) AND (all:catching OR all:\"dynamic grasping\" OR all:\"object interception\")",
+    "GitHub: robot catching in:description",
+    "GitHub: \"dynamic grasping\" in:description",
+    "Primary source: https://hybridrobotics.github.io/workhorse/",
+    "Primary source: https://seongdrgn.github.io/pixel2catch/",
+    "Primary source: https://rice-robotpi-lab.github.io/DRIScatch/",
+    "Primary source: https://takahiromiki.com/explainers/event-based-catching/",
+    "Primary source: https://iros-2026-athletic-humanoid.github.io/workshop/",
+    "Primary source: https://rai-inst.com/resources/blog/bimanual-robot-for-dynamic-manipulation/",
+    "Primary source: https://github.com/enactic/openarm_hardware/releases"
+  ],
+  "excluded_candidates": [
+    {
+      "title": "Reflex: Visually Grounded Reactive Humanoid Control",
+      "reason": "已在历史期次（already_read_or_delivered）中深度分析并交付，本次去重排除。"
+    },
+    {
+      "title": "Learning Dynamic Grasping (arXiv:2610.14848)",
+      "reason": "属于计算机图形学与虚拟人体动画领域（4D hand-object sequence synthesis），未涉及真实物理接触动力学或闭环机器人控制。"
+    },
+    {
+      "title": "Blind Precise Assembly: Proprioceptive Sim-to-Real Peg-in-Hole for Diverse Parts (arXiv:2610.23849)",
+      "reason": "聚焦于静态微米级孔轴装配与纯本体感知探索，非飞行/动态运动物体的视差追踪与快速拦截任务。"
+    },
+    {
+      "title": "Not Every Mention Is a Claim: Rethinking Object Hallucination Detection in Vision-Language Models (arXiv:2610.23610)",
+      "reason": "纯视觉语言模型（VLM）幻觉检测基准，与机器人抓取与拦截控制无关。"
+    }
+  ],
+  "papers": [
+    {
+      "id": "arxiv:2610.09117v2",
+      "title": "Workhorse: Learning Robust Whole-Body Humanoid Loco-Manipulation from Human Data",
+      "authors": "Songbo Hu, Qiayuan Liao, Yufeng Chi, Kevin Zakka, Yakun Sophia Shao, Pieter Abbeel, Koushil Sreenath",
+      "institutions": [
+        "University of California, Berkeley"
+      ],
+      "publication": "arXiv preprint",
+      "first_posted": "2026-10-06",
+      "version_date": "2026-10-08",
+      "reading_level": "full_text",
+      "category": "core",
+      "arxiv_url": "https://arxiv.org/abs/2610.09117v2",
+      "pdf_url": "https://arxiv.org/pdf/2610.09117v2",
+      "project_url": "https://hybridrobotics.github.io/workhorse/",
+      "code_url": "",
+      "formulation": "论文针对双足人形机器人仅依靠胸前单目主观视点（Egocentric RGB）相机和自身本体感知（Proprioception），难以在非结构化环境中规划并执行富接触、高动态全身操作（如拦截抛掷箱子、踢踏搬运与攀爬）的难题。系统将问题解耦为：视觉规划层根据前向视觉与躯干坐标系下的末端历史位姿，以 5 Hz 预测未来 1.16 s 的躯干、双腕、双足共 5 个刚体链接（Five-link）的目标轨迹 Chunk；全身跟踪控制层以 50 Hz 将该五连杆目标结合自身本体感觉解算为全身各关节位置设定值。核心假设为通过无重定向（No retargeting）的统一任务空间位姿接口通信，并显式对规划漂移与执行误差进行双向训练数据增广，实现闭环全身扰动鲁棒性与跨本体迁移。",
+      "sensing_and_actions": "【感知配置】机器人部署阶段搭载胸前单目 RGB 相机（DJI Osmo Action 4，129° 近鱼眼视场，30 fps，带卷帘快门，输入时不去除畸变）与板载本体感知（IMU 提供的角速度、29 个关节当前角度与速度、上一时刻关节目标指令）。部署时不使用任何外部动捕（Mocap）或物体反光标记，躯干运动估计由卡尔曼滤波器融合腿部接触运动学与加速度计估计。【训练采集配置】人类示教采集采用轻量化背心与绑带系统：在胸前相机支架、两手手背、两脚鞋面固定 5 个 HTC Vive 追踪器（60 Hz），置于 4 个 Lighthouse 基站覆面的 5 m × 5 m 区域内，并在胸前固定同款 DJI 相机；同时采用实时逆运动学解算在屏幕上显示可达性与不可达预警。【动作空间】规划器输出 58 个时间步（步长 0.02 s，跨度 1.16 s）的 5 连杆位姿 Chunk（包含 3D 位置与 6D 旋转），跟踪器在 50 Hz 下输出 29 自由度的关节位置目标（Joint setpoints）。",
+      "pipeline": [
+        {
+          "stage": "示教采集与时钟对齐",
+          "method": "无机器人轻量化穿戴采集与三连拍手声学-运动学互相关时钟同步",
+          "input_output": "输入人体穿戴 5 个 Vive 追踪器（60 Hz）与胸前相机音频/视频（30 Hz），输出时钟误差 ≤5.5 ms、重采样至 50 Hz 且统一在重力对齐世界系下的 5 个 link 运动流与视频流。"
+        },
+        {
+          "stage": "视觉规划器离线编辑与增广训练",
+          "method": "SAM 3 分割前景人体验证与 LaMa 背景修复，MoGe-2 单目稠密深度估计，结合随机游走漂移与像素级单应/光流图像形变增广（Flow Matching + DiT 骨干网络）",
+          "input_output": "输入历史 4 帧 RGB 图像（间隔 0.24 s）与 9 帧带投影重力/高度的躯干系五连杆历史位姿（间隔 0.12 s），输出未来 1.16 s（58 步）在当前时刻躯干系下的 5 连杆目标轨迹 Chunk。"
+        },
+        {
+          "stage": "全身运动跟踪策略（WBC Tracker）强化学习",
+          "method": "基于 BeyondMimic/SuperMimic 的可微世界模型强化学习，结合锯齿状规划漂移与跳变（Command Augmentation）训练",
+          "input_output": "输入未来 0.2 s（6 步）五连杆目标窗口与即时本体感知（IMU、关节角速度、历史动作），输出 50 Hz 的 29 自由度电机位置伺服目标。"
+        },
+        {
+          "stage": "闭环实时重叠融合部署",
+          "method": "基于单调时间戳插值、历史 Chunk 截断与 Flow Matching 积分过程中的重叠区域条件修复（Inpainting）",
+          "input_output": "输入异步交付的图像帧（带系统延迟）与板载腿部里程计，输出时间连续、无跳变的平滑关节跟踪流。"
+        }
+      ],
+      "training": "【规划器训练】示教数据包含纸箱搬运 2.2 h、行李箱任务 1.2 h、飞箱动态拦截接球 13 min，全部由单一示教者完成。离线使用 SAM 3 + LaMa 剔除示教者并由 MuJoCo 渲染对应机器人机械臂覆盖；训练中对历史位姿注入沿时间反向累积的随机游走漂移，并利用 MoGe-2 深度图与交互矩阵对图像背景进行一致性仿射形变；规划器采用 Diffusion Transformer (DiT) 架构与 Flow Matching 目标，ResNet-18 提取图像特征，10 步欧拉数值积分推理。【跟踪器训练】在 mjlab GPU 动力学环境仿真训练，不使用任何真机采集数据。为消除两臂握箱接触内力未知问题，仿真中使用最高 40 N 刚度弹簧替代被抱纸箱；针对跟踪器面临的规划延迟与发散，人为注入 0.2~1 s 随机周期、最高 10 cm 平移与 10° 偏航的线性漂移锯齿误差，利用 SuperMimic 动力学神经网络生成 Rollout 并训练 Actor-Critic 网络。",
+      "results": [
+        {
+          "evidence": "在 3DGS 重建的真机示教房间仿真环境中测试长程箱子搬运（3 个箱子连续作业，限时 120 s），完整系统在无外部推力扰动下成功率为 77 %（跌倒仅 1 %）；在施加 40 N·s 骨盆随机方向冲量推力扰动（每 5~10 s 一次）下，成功率为 64 %，跌倒率为 15 %（100 次仿真 episode）。",
+          "source_anchor": "Section V-B, Page 6, Table II [原文](https://arxiv.org/pdf/2610.09117v2#page=6)"
+        },
+        {
+          "evidence": "规划与跟踪接口消融实验表明：若将 5 连杆任务空间目标在线经逆运动学解算为 29 维关节目标（Joint command），无推力/有推力成功率降至 54 % / 42 %；若移除规划器的漂移与视角形变增广（w/o planner augmentation），无推力/有推力成功率降至 20 % / 0 %，跌倒率飙升至 79 % / 95 %；若移除重力在躯干系投影（w/o projected gravity），成功率降至 1 %。",
+          "source_anchor": "Section V-B, Page 6, Table II [原文](https://arxiv.org/pdf/2610.09117v2#page=6)"
+        },
+        {
+          "evidence": "在无需重新采集人类数据的前提下，仅修改 5 处安装偏移量并重新在仿真重建房间内渲染，将系统迁移至全尺寸 Unitree H2 双足机器人，无推力下箱子搬运成功率达 83 %（100 次仿真 episode）。",
+          "source_anchor": "Section V-C, Page 8, Text [原文](https://arxiv.org/pdf/2610.09117v2#page=8)"
+        },
+        {
+          "evidence": "在真实 Unitree G1 实体机器人上验证动态拦截接箱能力：机器人完全依靠胸前单目 RGB 相机与板载本体感知，成功在空中拦截接住空中飞行时间约 0.56 s 的抛掷纸箱并平稳放置于地面。",
+          "source_anchor": "Section V-A, Page 6, Text & Figure 1(b) [原文](https://arxiv.org/pdf/2610.09117v2#page=6)"
+        }
+      ],
+      "analysis": "实验证实了将全身运动解耦为「稀疏关键连杆任务空间轨迹规划 + 鲁棒全身力矩/跟踪控制」的高效性，尤其是双向模拟彼此误差的数据增广（规划端对抗反向游走漂移，控制端适应锯齿状延迟跳变）是闭环系统在外部扰动与视觉累积误差下不失稳的关键。但实验存在明显局限：首先，空中拦截动态接球（Box catching）仅有 13 min 示教数据与定性能力展示（Real-world demonstration of capability），论文未报告真机动态拦截接球的定量成功率、飞行初速度范围或失败落点分布，其在 Table II 的严格定量仅限于静态箱子搬运任务；其次，真机拦截依赖于高帧率低延迟流处理，若抛掷速度过快超出 129° 单目相机视场或超出 5 Hz 重新规划响应极限，系统将难以在 0.56 s 飞行期内完成多次重规划闭环修正。",
+      "reviewer": {
+        "contribution": "该方法提出了一个基于无机器人穿戴式动捕（躯干、双腕、双脚5个连杆位姿）的人形机器人全身移动操作框架，无需关节空间重定向。系统解耦为预测五连杆轨迹块的视觉规划器与跟踪连杆目标输出关节设定点的强化学习全身跟踪器，并通过数据增强（规划器历史漂移与图像变换、跟踪器指令跳变漂移）和离线人体图像替换来处理闭环累积误差。",
+        "strength": "最直接的硬件证据是在Unitree G1真机上展示了多接触全身任务（抱箱与踢箱、空中接箱、推倒并踩踏14 kg行李箱取物）及抗人身推搡扰动能力，部署时仅使用胸部单目RGB与本体感知（规划器外置笔记本、跟踪器板载运行）。定量评估则基于高斯泼溅重建房间的MuJoCo闭环仿真，完整系统在搬箱任务中达成77%无推搡成功率以及64%抗40 N·s推搡成功率。",
+        "evidence_gap": "真机实验仅提供定性视频范例，未报告多次重复试验的统计成功率、跌倒次数或环境泛化表现。若要验证系统决策鲁棒性与泛化能力，需在真机上针对随机初始位姿和不同光照/房间布局进行成批次测试并统计完整的成功与失误数据。",
+        "comparison": "实验主要对比了系统内部消融变体（如移除规划器增强、投影重力或使用局部坐标系），而非对其他具名端到端系统进行独立完整复现。在与参考BifrostUMI方案的在线逆运动学关节指令变体对比中，五连杆指令取得了更高的任务成功率（无推搡77%对54%、有推搡64%对42%），但在推搡下的跌倒率明显更高（15%对4%），体现出操作位姿可达性与关节级步态稳定裕度之间的权衡。",
+        "judgement": "论文充分支持了“无需重定向的五连杆任务空间接口结合针对性误差增强可在仿真中实现闭环全身操作，并在真机上展现多种动态多接触行为能力”的主张。但该系统在真机部署下的统计成功率、跨房间/多演示者泛化能力，以及第二个本体（Unitree H2）在真实世界中的迁移效果仍处于未闭环验证状态。"
+      },
+      "openarm_relevance": "对固定基座或移动单/双臂 OpenArm/OpenArmX 平台进行高速来袭物体动态拦截与截击操作具有直接借鉴价值：(1) **端到端位姿 Chunking + 实时缝合**：OpenArm 可将末端夹爪 6D 目标作为规划接口，采用类似的 Flow Matching Inpainting 消除 5~10 Hz 慢速视觉规划与 200~1000 Hz 关节控制间的跳变断层；(2) **时间戳单调时钟对齐**：为 OpenArm 板载 RealSense/USB 相机与关节电机通讯提供经过实证的单调时间戳插值机制；(3) **最小验证实验**：在 MuJoCo 中构建 OpenArm 截击仿真环境，引入 5~10 Hz 图像观测延迟与末端跟踪漂移，测试加入锯齿状命令增广（Command drift augmentation）前后夹爪拦截 0.5~1.0 s 飞行轨迹物体的接触拦截成功率对比。",
+      "sources": [
+        "https://arxiv.org/abs/2610.09117v2",
+        "https://arxiv.org/pdf/2610.09117v2",
+        "https://hybridrobotics.github.io/workhorse/"
+      ],
+      "figures": [
+        {
+          "role": "pipeline",
+          "figure_label": "Fig. 2",
+          "image_url": "",
+          "source_url": "https://arxiv.org/pdf/2610.09117v2#page=2",
+          "pdf_page": 2,
+          "bbox": [
+            0.08,
+            0.055,
+            0.92,
+            0.198
+          ],
+          "caption": "Workhorse 整体系统框架。虚线表示离线训练流，实线为在线部署流。人类示教无须关节重定向，直接提取躯干、双腕和双足共 5 个刚体链接位姿；在线阶段，视觉规划器输入胸前主观 RGB 与五连杆历史位姿，以 5 Hz 预测未来五连杆轨迹目标，全身跟踪器以 50 Hz 接收该目标并输出关节设定值。"
+        },
+        {
+          "role": "experiment",
+          "figure_label": "TABLE II",
+          "image_url": "",
+          "source_url": "https://arxiv.org/pdf/2610.09117v2#page=6",
+          "pdf_page": 6,
+          "bbox": [
+            0.505,
+            0.055,
+            0.915,
+            0.265
+          ],
+          "caption": "在 3DGS 重建房间内进行的箱子搬运闭环消融实验（100 个模拟 episode）。数据清晰表明：相比传统逆运动学关节指令（Joint command），基于五连杆任务空间的完整系统在无推力（77% vs 54%）和 40 N·s 冲量扰动（64% vs 42%）下均取得最高完成率；移除规划器漂移增广或重力投影会导致系统近乎完全崩溃。"
+        }
+      ],
+      "figures_unavailable_reason": ""
+    }
+  ],
+  "resources": [
+    {
+      "id": "blog:rai-athenazero-2026",
+      "title": "AthenaZero: A Bimanual Robot for Dynamic Manipulation",
+      "kind": "blog",
+      "creator": "Andrew S. Morgan et al.",
+      "affiliation": "Robotics and AI Institute (RAI Institute)",
+      "published_at": "2026-04-07",
+      "access_url": "https://rai-inst.com/resources/blog/bimanual-robot-for-dynamic-manipulation/",
+      "related_paper_url": "https://arxiv.org/abs/2609.19194",
+      "source_level": "full_text",
+      "summary": "详细阐述了用于高速动态操作（投掷、接球、击打）的双臂机器人AthenaZero的低惯量准直驱（QDD）硬件设计与阻抗控制策略。通过近端布置电机与小减速比（多数关节5:1）消除末端反射惯量（腕部有效质量仅3.97 kg），完全依靠电机电流完成无力传感器的高速接球碰撞吸收（承受最高达18 m/s的来球）。",
+      "research_relevance": "为OpenArm在执行高速接球与接触保持时的阻抗匹配提供了关键参考，证明了降低末端反射惯量与采用任务自适应就绪阻抗（task readiness impedance）相比于单纯高增益位置控制在吸收碰撞能量方面的决定性优势。",
+      "judgement": "RAI Institute官方技术博客，包含实机测试数据（最高113 km/h投掷与66 km/h短距离接球），但接球依赖外部感知系统提供轨迹预估，主要贡献在于机械本体动力学与抗冲击阻抗设计。",
+      "access_notes": "公开网页，英文全文，阅读时间约4分钟。",
+      "sources": [
+        "https://rai-inst.com/resources/blog/bimanual-robot-for-dynamic-manipulation/",
+        "https://arxiv.org/abs/2609.19194"
+      ],
+      "figures": [],
+      "figures_unavailable_reason": "初筛发现阶段仅抽取元数据与文本，未进行PDF区域截取。"
+    },
+    {
+      "id": "explainer:uzh-rpg-event-catching-2023",
+      "title": "Event-based Agile Object Catching with a Quadrupedal Robot: An Animated Walkthrough",
+      "kind": "blog",
+      "creator": "Takahiro Miki, Benedek Forrai, Daniel Gehrig, Marco Hutter, Davide Scaramuzza",
+      "affiliation": "ETH Zurich (RSL) / University of Zurich (RPG)",
+      "published_at": "2023-05-29",
+      "access_url": "https://takahiromiki.com/explainers/event-based-catching/",
+      "related_paper_url": "https://arxiv.org/abs/2303.17479",
+      "source_level": "partial",
+      "summary": "该交互式解析页面通过动图和数学推导详细拆解了ANYmal四足机器人利用机载iniVation事件相机实现15 m/s动态飞球捕获的全流程：IMU角速度补偿去除背景事件、平均时间戳图像聚类、两帧拟合3D抛物线、RANSAC鲁棒估计碰撞交点，以及Isaac Gym中训练的全身PPO控制器在100 Hz下的拦截执行。",
+      "research_relevance": "详细推导了传统帧式相机与神经拟态事件相机在Worst-case Latency上的严格理论边界（Δtl = 2ΔtFPS + Δtc vs 3Δtc），展示了机载相机在移动基座剧烈震荡下如何消除自运动伪影（ego-motion compensation），对OpenArm机载动态感知流水线具有直接指导意义。",
+      "judgement": "作者亲自编写的高质量交互式论文图解，包含完整的流水线模块公式与真实实验限制（如单目依赖已知物体尺寸10 cm、陡峭抛线易丢失等），论据扎实透明。",
+      "access_notes": "公开无门槛访问，英文，包含完整文本与交互动画演示，通读约5分钟。 本次仅核验到搜索/部分页面材料，未取得完整正文访问记录；原文细节需回到来源核对。",
+      "sources": [
+        "https://takahiromiki.com/explainers/event-based-catching/",
+        "https://arxiv.org/abs/2303.17479"
+      ],
+      "figures": [],
+      "figures_unavailable_reason": "初筛发现阶段仅抽取元数据与文本，未进行PDF区域截取。"
+    },
+    {
+      "id": "demo:pixel2catch-dongguk-2026",
+      "title": "Pixel2Catch: Multi-Agent Sim-to-Real Transfer for Agile Manipulation with a Single RGB Camera",
+      "kind": "demo",
+      "creator": "Seongyong Kim, Junhyeon Cho, Kang-Won Lee, Soo-Chul Lim",
+      "affiliation": "Dongguk University",
+      "published_at": "2026-02-26",
+      "access_url": "https://seongdrgn.github.io/pixel2catch/",
+      "related_paper_url": "https://arxiv.org/abs/2602.22733",
+      "source_level": "full_text",
+      "summary": "展示了单目RGB图像空间中提取像素级特征（中心坐标变化表征飞行方向、长宽尺度变化表征相对景深距离）并结合SAM2分割的动态接球系统。在控制端采用异构多智能体强化学习（MAPPO），将机械臂定位与多指灵巧手抓握解耦训练，无需显式3D位置重建即可实现零样本Sim-to-Real迁移。",
+      "research_relevance": "提出了一种绕过复杂且耗时的3D点云与空间坐标重建的替代方案，直接以图像平面的BBox几何变化与时序差分作为动态策略输入，为OpenArm端到端机载RGB轻量化接球策略提供了实用基线。",
+      "judgement": "在RA-L 2026正式录用，提供360次真机抛接评测数据（立方体、L形块、三角形物块分别达到60.6%、51.3%、46.6%成功率）。不过其实验相机为固定外置视角（robot上方2.2米），迁移至机器人本体Eye-in-Hand相机时仍需解决相机晃动引起的视差耦合。",
+      "access_notes": "公开项目主页，包含完整视频展示与代码仓库链接，阅读约3分钟。",
+      "sources": [
+        "https://seongdrgn.github.io/pixel2catch/",
+        "https://arxiv.org/abs/2602.22733"
+      ],
+      "figures": [],
+      "figures_unavailable_reason": "初筛发现阶段仅抽取元数据与文本，未进行PDF区域截取。"
+    },
+    {
+      "id": "talk:iros-athletic-humanoid-2026",
+      "title": "Perception and Decision Making for Athletic Humanoid Robotics (AthleticHumanoid Workshop @ IROS 2026)",
+      "kind": "talk",
+      "creator": "Guanya Shi, Peter Stone, Chenhao Liu, Aude Billard et al.",
+      "affiliation": "Purdue University / CMU / UT Austin / EPFL / Phybot",
+      "published_at": "2026-09-27",
+      "access_url": "https://iros-2026-athletic-humanoid.github.io/workshop/",
+      "related_paper_url": "",
+      "source_level": "metadata_only",
+      "summary": "IROS 2026竞技型机器人研讨会官方日程与讲座摘要汇总，聚焦极限动态运动、球拍类击球（羽毛球、乒乓球）与空中动态物体接抛。包括Aude Billard关于超人级灵巧抓接高速运动物体的变阻抗策略、Peter Stone的Ace乒乓球事件视觉系统，以及Chenhao Liu关于端到端无预测直接反应式羽毛球击球策略的报告。",
+      "research_relevance": "汇集了动态拦截领域的国际核心流派观点（基于显式轨迹预测+最优控制 vs 基于端到端强反应性RL策略），重点探讨了毫秒级反应窗口下计算延迟与传感器带宽的权衡边界。",
+      "judgement": "非单一论文，而是顶级学术研讨会的集成页面，提供了当前体育运动与动态抓接机器人学术界的最新路线争议与实验共识，非常适合梳理博士课题的背景与方法定位。",
+      "access_notes": "公开主页，包含讲座题目、详细Abstract及YouTube讲座录屏列表，浏览约5分钟。 本次仅核读发布页或活动／节目说明，未观看或听取内容。",
+      "sources": [
+        "https://iros-2026-athletic-humanoid.github.io/workshop/"
+      ],
+      "figures": [],
+      "figures_unavailable_reason": "初筛发现阶段仅抽取元数据与文本，未进行PDF区域截取。"
+    }
+  ]
+}

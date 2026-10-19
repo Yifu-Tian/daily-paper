@@ -1,0 +1,48 @@
+[
+  {
+    "owner_id": "arxiv:2610.09117v2",
+    "kind": "paper",
+    "role": "pipeline",
+    "figure_label": "Fig. 2",
+    "image_url": "",
+    "source_url": "https://arxiv.org/pdf/2610.09117v2#page=2",
+    "pdf_page": 2,
+    "bbox": [
+      0.08,
+      0.055,
+      0.92,
+      0.198
+    ],
+    "caption": "Workhorse 整体系统框架。虚线表示离线训练流，实线为在线部署流。人类示教无须关节重定向，直接提取躯干、双腕和双足共 5 个刚体链接位姿；在线阶段，视觉规划器输入胸前主观 RGB 与五连杆历史位姿，以 5 Hz 预测未来五连杆轨迹目标，全身跟踪器以 50 Hz 接收该目标并输出关节设定值。",
+    "path": "media/paper_01_pipeline.jpg",
+    "mime_type": "image/jpeg",
+    "content_id": "paper_01_pipeline@ego-digest",
+    "width": 1285,
+    "height": 283,
+    "bytes": 102878,
+    "sha256": "e6655129858bd7c7e0027e463d08ef08f14cd3e07fcc1029f67b50e7a2be295c"
+  },
+  {
+    "owner_id": "arxiv:2610.09117v2",
+    "kind": "paper",
+    "role": "experiment",
+    "figure_label": "TABLE II",
+    "image_url": "",
+    "source_url": "https://arxiv.org/pdf/2610.09117v2#page=6",
+    "pdf_page": 6,
+    "bbox": [
+      0.505,
+      0.055,
+      0.915,
+      0.265
+    ],
+    "caption": "在 3DGS 重建房间内进行的箱子搬运闭环消融实验（100 个模拟 episode）。数据清晰表明：相比传统逆运动学关节指令（Joint command），基于五连杆任务空间的完整系统在无推力（77% vs 54%）和 40 N·s 冲量扰动（64% vs 42%）下均取得最高完成率；移除规划器漂移增广或重力投影会导致系统近乎完全崩溃。",
+    "path": "media/paper_01_experiment.jpg",
+    "mime_type": "image/jpeg",
+    "content_id": "paper_01_experiment@ego-digest",
+    "width": 627,
+    "height": 416,
+    "bytes": 71789,
+    "sha256": "c39be5cc1f7c8733b80b13011c7c7ceacf93038b3f8fa03f666caea4992cf50b"
+  }
+]
