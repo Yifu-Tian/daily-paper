@@ -1,6 +1,14 @@
 """Render complete paper analyses and attributed figures as GitHub Markdown."""
 from __future__ import annotations
+import re
 from typing import Any
+
+
+def avoid_unrequested_mentions(text: str) -> str:
+    """Keep source URLs intact while preventing copied social handles from pinging others."""
+    pieces = re.split(r"(https://[^\s)]+)", text)
+    return ''.join(piece if piece.startswith('https://') else
+                   re.sub(r'(?<![\w/])@(?=[A-Za-z0-9])', '@\u200b', piece) for piece in pieces)
 
 
 def markdown(data: dict[str, Any], assets: list[dict[str, Any]]) -> str:
@@ -9,6 +17,9 @@ def markdown(data: dict[str, Any], assets: list[dict[str, Any]]) -> str:
         lines += [f"## {index}. {paper['title']}", "", f"**作者：** {paper['authors']}",
                   f"**单位：** {'; '.join(paper['institutions'])}",
                   f"**发表与版本：** {paper['publication']} · {paper['version_date']}", ""]
+        categories = {'core': '核心相关工作', 'adjacent': '相邻工作，需核对传感器与任务差异',
+                      'foundational': '旧文补读', 'update': '已有论文的新版本'}
+        lines += ["**选题定位：** " + categories[paper['category']], ""]
         lines += [" · ".join(f"[{label}]({paper[key]})" for key, label in
                             [("arxiv_url", "arXiv"), ("pdf_url", "PDF 下载"),
                              ("project_url", "Project"), ("code_url", "Code")] if paper[key]), "",

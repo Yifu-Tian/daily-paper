@@ -1,48 +1,48 @@
 [
   {
-    "owner_id": "arxiv:2602.22733",
+    "owner_id": "arxiv:2610.09117v2",
     "kind": "paper",
     "role": "pipeline",
     "figure_label": "Fig. 2",
     "image_url": "",
-    "source_url": "https://arxiv.org/pdf/2602.22733#page=3",
-    "pdf_page": 3,
+    "source_url": "https://arxiv.org/pdf/2610.09117v2#page=2",
+    "pdf_page": 2,
     "bbox": [
-      0.165,
-      0.064,
-      0.875,
-      0.354
+      0.08,
+      0.055,
+      0.92,
+      0.198
     ],
-    "caption": "完整方法与硬件配置：连续两时刻的臂/手专属状态及共享像素、末端状态输入两个独立策略，仿真中通过 MAPPO 协同训练；特权物体信息仅供价值网络训练。策略分别输出6维臂动作和13维手动作。真机使用外置单 RGB 相机，标注安装位置为机器人后方0.5 m、上方2.2 m。此图说明训练与执行结构，不提供定量性能证据。",
+    "caption": "Workhorse 整体系统框架。虚线表示离线训练流，实线为在线部署流。人类示教无须关节重定向，直接提取躯干、双腕和双足共 5 个刚体链接位姿；在线阶段，视觉规划器输入胸前主观 RGB 与五连杆历史位姿，以 5 Hz 预测未来五连杆轨迹目标，全身跟踪器以 50 Hz 接收该目标并输出关节设定值。",
     "path": "media/paper_01_pipeline.jpg",
     "mime_type": "image/jpeg",
     "content_id": "paper_01_pipeline@ego-digest",
-    "width": 1086,
-    "height": 574,
-    "bytes": 129996,
-    "sha256": "8b38e8de4db51b4da63a480875f72e5b19a8900b195e58b9f895957fc0924986"
+    "width": 1285,
+    "height": 283,
+    "bytes": 102878,
+    "sha256": "e6655129858bd7c7e0027e463d08ef08f14cd3e07fcc1029f67b50e7a2be295c"
   },
   {
-    "owner_id": "arxiv:2602.22733",
+    "owner_id": "arxiv:2610.09117v2",
     "kind": "paper",
     "role": "experiment",
-    "figure_label": "Table III",
+    "figure_label": "TABLE II",
     "image_url": "",
-    "source_url": "https://arxiv.org/pdf/2602.22733#page=7",
-    "pdf_page": 7,
+    "source_url": "https://arxiv.org/pdf/2610.09117v2#page=6",
+    "pdf_page": 6,
     "bbox": [
       0.505,
-      0.537,
-      0.916,
-      0.758
+      0.055,
+      0.915,
+      0.265
     ],
-    "caption": "真机结果：比较 Only-WH、Only-Center、单智能体 S-A RL 与 Proposed，列为 Cube、L-block、Triangle。T.R. 衡量手掌接触物体，S.R. 要求接触后稳定抓住且不掉落，单位均为%，越高越好。Proposed 的 T.R. 为73/73/70，S.R. 为63/43/43；S-A RL 的 S.R. 为33/20/20。每物体报告30次试验，未报告置信区间或明确保持时长；接触率不能等同于稳定接取成功率，也不能据此证明长期保持能力。",
+    "caption": "在 3DGS 重建房间内进行的箱子搬运闭环消融实验（100 个模拟 episode）。数据清晰表明：相比传统逆运动学关节指令（Joint command），基于五连杆任务空间的完整系统在无推力（77% vs 54%）和 40 N·s 冲量扰动（64% vs 42%）下均取得最高完成率；移除规划器漂移增广或重力投影会导致系统近乎完全崩溃。",
     "path": "media/paper_01_experiment.jpg",
     "mime_type": "image/jpeg",
     "content_id": "paper_01_experiment@ego-digest",
-    "width": 629,
-    "height": 438,
-    "bytes": 51762,
-    "sha256": "cf3755d9a946626bf3c675127249a6e3b5e3b122c9b7c30f8eb359e80e8887d8"
+    "width": 627,
+    "height": 416,
+    "bytes": 71789,
+    "sha256": "c39be5cc1f7c8733b80b13011c7c7ceacf93038b3f8fa03f666caea4992cf50b"
   }
 ]

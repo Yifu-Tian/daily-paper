@@ -13,7 +13,7 @@ from urllib.request import Request, urlopen
 
 import cloud
 import core
-from formatting import markdown
+from formatting import avoid_unrequested_mentions, markdown
 from media import write_bundle
 
 
@@ -34,8 +34,9 @@ def prepare(folder: Path, config: dict[str, Any], issue_date: str, sample: bool 
     if sample:
         source = core.ROOT / "examples/illustrated"
         data = core.read_json(source / "digest.json")
+        source_date = data["date"]
         data["date"] = issue_date
-        data["overview"] = "【测试样刊，选材与核读日期为 2026-10-19】" + data["overview"]
+        data["overview"] = f"【测试样刊，选材与核读日期为 {source_date}】" + data["overview"]
         shutil.copytree(source / "media", folder / "media", dirs_exist_ok=True)
         assets = core.read_json(source / "media.json")
         core.write_json(folder / "media.json", assets)
@@ -94,7 +95,7 @@ def publish(folder: Path, config: dict[str, Any], issue_date: str, sample: bool 
         for asset in core.read_json(folder / "media.json"):
             url = f"https://raw.githubusercontent.com/{repository}/{sha}/archive/{folder.name}/{asset['path']}"
             body = body.replace("(" + asset["path"] + ")", "(" + url + ")")
-        body = marker + f"\n\n@{config['assignee']} 今天的图文研究日报。\n\n" + body
+        body = marker + f"\n\n@{config['assignee']} 今天的图文研究日报。\n\n" + avoid_unrequested_mentions(body)
         if len(body) > 65000:
             raise ValueError("Issue body too long; preserve the archive instead of silently truncating paper fields")
         title = ("[测试] " if sample else "") + f"Ego Catching Research Radar · {issue_date}"

@@ -24,5 +24,15 @@
       "title": "Agile Catching with Whole-Body MPC and Blackbox Policy Learning"
     }
   ],
-  "already_read_resources": []
+  "already_read_resources": [],
+  "discovery_mode": "public_sources",
+  "primary_resource_pages": [
+    "https://hybridrobotics.github.io/workhorse/",
+    "https://seongdrgn.github.io/pixel2catch/",
+    "https://rice-robotpi-lab.github.io/DRIScatch/",
+    "https://takahiromiki.com/explainers/event-based-catching/",
+    "https://iros-2026-athletic-humanoid.github.io/workshop/",
+    "https://rai-inst.com/resources/blog/bimanual-robot-for-dynamic-manipulation/",
+    "https://github.com/enactic/openarm_hardware/releases"
+  ]
 }

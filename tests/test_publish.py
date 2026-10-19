@@ -20,6 +20,7 @@ class PublicationTests(unittest.TestCase):
         self.root_patch.start()
         self.config = {'repository': 'example/radar', 'assignee': 'reader'}
         data = issue()
+        data['papers'][0]['formulation'] += ' Fixture @other_reader. [Channel](https://www.youtube.com/@fixture)'
         data['papers'][0].update(figures=[], figures_unavailable_reason='Synthetic fixture only.')
         self.assets = [{'owner_id': data['papers'][0]['id'], 'role': 'pipeline', 'path': 'media/fixture.jpg',
                         'figure_label': 'Fixture figure', 'caption': 'Synthetic fixture, not paper evidence.',
@@ -46,6 +47,9 @@ class PublicationTests(unittest.TestCase):
         with patch.object(run, 'github', side_effect=api), patch.object(run.subprocess, 'check_output', return_value='abc123\n'):
             run.publish(self.folder, self.config, '2026-10-19', True)
         self.assertIn('raw.githubusercontent.com/example/radar/abc123/archive/20261019_sample/media/fixture.jpg', created['body'])
+        self.assertIn('@reader 今天的图文研究日报', created['body'])
+        self.assertIn('@\u200bother_reader', created['body'])
+        self.assertIn('https://www.youtube.com/@fixture', created['body'])
         for field in ['Problem formulation', 'Pipeline', '训练数据与监督', '实验结果及分析', 'Robotics reviewer judgment']:
             self.assertIn(field, created['body'])
         receipt = core.read_json(self.folder / 'receipt.json')

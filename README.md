@@ -29,10 +29,16 @@ reviewer judgment，以及可迁移到 OpenArm 的机制和最小实验。通常
    选择 **full** 则立即执行一次真实检索、全文阅读和发布。
 
 初次推送会自动测试样刊。样刊核读日期明确标注，不假装是当天新论文；重复运行不重复创建 Issue。
-常规运行读取本仓库 Secret 后调用 Gemini：联网发现候选，再把实际原始 PDF 作为文档输入，
-阅读全文、图表与实验，输出结构化分析。Poppler 从相同 PDF 字节提取原图。
+常规运行直接查询 arXiv API、GitHub 搜索和配置的作者／项目页，再把实际取得的材料及原始 PDF
+交给 Gemini Interactions API，
+阅读全文、图表与实验，输出结构化分析。Reviewer 判断另用原始 PDF 在新上下文中生成，
+不向该步骤提供初稿的评价，以减少沿用初稿夸大措辞的风险；这仍是 AI 辅助评估，不能代替专家审稿。
+Poppler 从相同 PDF 字节提取原图。
 配置在 [config.json](config.json)，选题和证据要求在 [prompts/research.md](prompts/research.md)。
 API 调用可能消耗相应项目额度；模型和论文数均可配置。
+默认发现阶段不依赖 Google Search grounding 的额外额度。推文、talk 和视频仅覆盖这些公开来源
+实际暴露的正文或链接；不声称订阅了全部 X 账号或看过所有视频。增加作者／项目来源可修改
+`primary_resource_pages`。普通模型 API 仍须有可用额度。
 
 ## 验证与归档
 
@@ -52,3 +58,11 @@ python3 run.py publish        # In Actions, uses its built-in GITHUB_TOKEN.
 
 GitHub 官方说明：[定时与时区](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)、
 [通知邮件的参与／指派原因](https://docs.github.com/en/subscriptions-and-notifications/reference/email-notification-headers)。
+
+## 部署权限
+
+本地 Git 凭据需要被授权访问这个新仓库。若推送返回 HTTP 403，请在
+[Fine-grained tokens](https://github.com/settings/personal-access-tokens) 中把仓库加入该 token 的
+Repository access，并给予 Contents、Workflows、Actions、Secrets 的读写权限。
+这些是推送、触发／检查运行和加密设置 API Secret 所需的部署权限，不是发送日报时的权限。
+工作流本身只使用仓库提供的 `GITHUB_TOKEN`，权限为 Contents 与 Issues；不保存个人 Git token。
