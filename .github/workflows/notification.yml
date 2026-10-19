@@ -1,0 +1,69 @@
+name: Notification Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Published bot issue to resend as an illustrated notification
+        type: string
+        default: '1'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Resend the published digest through the GitHub bot
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ inputs.issue_number }}
+          RUN_ID: ${{ github.run_id }}
+          RECIPIENT: Yifu-Tian
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from urllib.request import Request, urlopen
+
+          def api(path, method='GET', payload=None):
+              request = Request(
+                  'https://api.github.com/repos/' + os.environ['REPOSITORY'] + '/' + path,
+                  method=method,
+                  data=json.dumps(payload).encode() if payload is not None else None,
+                  headers={
+                      'Authorization': 'Bearer ' + os.environ['GITHUB_TOKEN'],
+                      'Accept': 'application/vnd.github+json',
+                      'Content-Type': 'application/json',
+                      'X-GitHub-Api-Version': '2022-11-28',
+                  },
+              )
+              with urlopen(request, timeout=30) as response:
+                  return json.load(response)
+
+          number = int(os.environ['ISSUE_NUMBER'])
+          assert number > 0
+          issue = api(f'issues/{number}')
+          assert issue['user']['login'] == 'github-actions[bot]'
+          assert '<!-- ego-catching-digest:' in issue['body']
+          marker = '<!-- radar-notification-test:' + os.environ['RUN_ID'] + ' -->'
+          comments = api(f'issues/{number}/comments?per_page=100')
+          comment = next((item for item in comments
+                          if item['user']['login'] == 'github-actions[bot]'
+                          and marker in (item.get('body') or '')), None)
+          if comment is None:
+              body = (marker + '\n\n@' + os.environ['RECIPIENT']
+                      + ' **邮箱投递重测**：按你的要求重新发送完整图文测试日报。'
+                      + '请确认当前设置的收件邮箱是否收到这封 GitHub 官方通知。\n\n'
+                      + issue['body'])
+              assert len(body) < 65000
+              comment = api(f'issues/{number}/comments', 'POST', {'body': body})
+          check = api('issues/comments/' + str(comment['id']))
+          assert check['user']['login'] == 'github-actions[bot]'
+          assert marker in check['body'] and issue['body'] in check['body']
+          print('Notification resent and independently read back:', check['html_url'])
+          PY
