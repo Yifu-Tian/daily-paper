@@ -2,6 +2,7 @@
 """Prepare illustrated research digests and publish through the GitHub bot."""
 from __future__ import annotations
 import argparse
+from datetime import datetime, time
 import json
 import os
 from pathlib import Path
@@ -10,11 +11,32 @@ import subprocess
 from typing import Any
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
+from zoneinfo import ZoneInfo
 
 import cloud
 import core
 from formatting import avoid_unrequested_mentions, markdown
 from media import write_bundle
+
+
+def scheduled_mode(config: dict[str, Any], current_time: datetime) -> str | None:
+    """Recover today's missing work using local deadlines and durable receipts."""
+    if current_time.tzinfo is None:
+        raise ValueError("Scheduled execution requires a timezone-aware timestamp")
+    local_time = current_time.astimezone(ZoneInfo(config["timezone"]))
+    prepare_at = time.fromisoformat(config.get("prepare_at", "07:00"))
+    send_at = time.fromisoformat(config["send_at"])
+    if prepare_at >= send_at:
+        raise ValueError("prepare_at must be earlier than send_at")
+    folder = core.ROOT / "archive" / local_time.strftime("%Y%m%d")
+    if (folder / "receipt.json").is_file():
+        return None
+    # A late trigger must recover both phases if the morning preparation was missed.
+    if local_time.time() >= send_at:
+        return "full"
+    if local_time.time() >= prepare_at and not (folder / "prepared.json").is_file():
+        return "prepare"
+    return None
 
 
 def bundle(data: dict[str, Any], folder: Path, config: dict[str, Any]) -> None:

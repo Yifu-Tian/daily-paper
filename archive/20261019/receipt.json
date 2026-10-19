@@ -5,5 +5,6 @@
   "publisher": "github-actions[bot]",
   "assignee": "Yifu-Tian",
   "published_at": "2026-10-19T14:30:46Z",
-  "email_delivery_verified": false
+  "email_delivery_verified": true,
+  "email_verification_method": "recipient_confirmation"
 }

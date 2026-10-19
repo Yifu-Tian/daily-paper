@@ -1,5 +1,6 @@
 {
   "timezone": "America/New_York",
+  "prepare_at": "07:00",
   "send_at": "08:30",
   "max_papers": 3,
   "model": "gemini-3.8-flash",

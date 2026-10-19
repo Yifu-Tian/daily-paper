@@ -6,13 +6,18 @@ on:
       timezone: America/New_York
     - cron: '30 8 * * *'
       timezone: America/New_York
+    # Additional UTC schedule entries cover EDT and EST; Python checks local deadlines.
+    # Repeated triggers skip completed work and never send a second daily issue.
+    - cron: '17 11,12 * * *'
+    - cron: '45 12,13 * * *'
+    - cron: '10 13,14 * * *'
   workflow_dispatch:
     inputs:
       mode:
-        description: Prepare research, publish prepared research, run both, or test the illustrated sample
+        description: Prepare, publish, run both, check scheduled recovery, or test the sample
         type: choice
         default: full
-        options: [prepare, publish, full, sample]
+        options: [prepare, publish, full, scheduled, sample]
   push:
     branches: [main]
     paths:
@@ -42,28 +47,32 @@ jobs:
         id: phase
         env:
           EVENT_NAME: ${{ github.event_name }}
-          SCHEDULE: ${{ github.event.schedule }}
           REQUESTED_MODE: ${{ inputs.mode }}
         run: |
           python - <<'PY'
           import os
-          if os.environ['EVENT_NAME'] == 'schedule':
-              mode = 'prepare' if os.environ['SCHEDULE'] == '0 7 * * *' else 'publish'
+          import core
+          import run
+          if os.environ['EVENT_NAME'] == 'schedule' or os.environ['REQUESTED_MODE'] == 'scheduled':
+              config = core.read_json(core.ROOT / 'config.json')
+              mode = run.scheduled_mode(config, core.now(config)) or 'skip'
           elif os.environ['EVENT_NAME'] == 'push':
               mode = 'sample'
           else:
               mode = os.environ['REQUESTED_MODE']
-          assert mode in {'prepare', 'publish', 'full', 'sample'}
+          assert mode in {'prepare', 'publish', 'full', 'sample', 'skip'}
+          print(f'Selected phase: {mode}')
           with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
               output.write(f'mode={mode}\n')
           PY
       - name: Install PDF tools
-        if: steps.phase.outputs.mode != 'publish'
+        if: steps.phase.outputs.mode != 'publish' && steps.phase.outputs.mode != 'skip'
         run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
       - name: Validate the pipeline
-        if: steps.phase.outputs.mode != 'publish'
+        if: steps.phase.outputs.mode != 'publish' && steps.phase.outputs.mode != 'skip'
         run: python -m unittest discover -s tests -v
       - name: Run the research or publication phase
+        if: steps.phase.outputs.mode != 'skip'
         env:
           RADAR_MODE: ${{ steps.phase.outputs.mode }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

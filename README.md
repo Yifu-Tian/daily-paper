@@ -7,6 +7,12 @@ GitHub Actions 在纽约时间每天 **07:00 生成，08:30 发布**，自动跟
 `github-actions[bot]` 创建图文 Issue，指派并 @`Yifu-Tian`；邮件由 GitHub 官方通知系统发送。
 无需本机开机，也无需 Gmail 自发邮件或 SMTP 密码。Actions 排队可能使实际发布时间晚于计划时间。
 
+定时流程另有 UTC 备份触发，覆盖夏令时和冬令时。每次执行都按纽约实际日期、时间和归档状态决定
+是否补跑：07:00 后缺少内容就补生成，08:30 后尚未发布就补生成／发布；已有当天发布回执则跳过。
+这样即使 07:00 的任务没有触发，后续任务也能接续生成，不会直接因缺少内容而终止。
+备份包含当地 07:17、08:45、09:10 的检查，其他季节对应的多余触发也会执行同样的时间与去重检查。
+GitHub 定时任务仍可能延迟或漏触发，这套补跑减少单次漏触发的影响，不能保证严格准点投递。
+
 ## 日报内容
 
 每篇精读保留论文题目、作者／单位、arXiv 与 PDF 下载、Project／Code、problem formulation、
@@ -29,6 +35,7 @@ reviewer judgment，以及可迁移到 OpenArm 的机制和最小实验。通常
 3. 打开 [Daily Research Radar](https://github.com/Yifu-Tian/daily-paper/actions/workflows/radar.yml)，
    选择 **Run workflow → sample**，测试图文 Issue 和 GitHub 官方邮件通知；
    选择 **full** 则立即执行一次真实检索、全文阅读和发布。
+   **scheduled** 按当前纽约时间检查并补齐当天缺少的工作，已发布则跳过；可用于检查定时恢复路径。
 
 初次推送会自动测试样刊。样刊核读日期明确标注，不假装是当天新论文；重复运行不重复创建 Issue。
 需要重测邮箱投递时，运行 [Notification Test](https://github.com/Yifu-Tian/daily-paper/actions/workflows/notification.yml)，
@@ -60,6 +67,7 @@ python3 run.py publish        # In Actions, uses its built-in GITHUB_TOKEN.
 工作流会回读新 Issue，核对 bot 身份、正文标记和 assignee。这个检查证明 **GitHub 发布成功**，
 不能代替最终邮箱送达验证；邮件是否发送、发往哪个已验证邮箱，取决于你的 GitHub 通知设置。
 正式链路失败会发布明确标记的运行状态 Issue，不编造完成的论文分析。
+失败通知只有在工作流被触发后才有机会运行；GitHub 完全没有触发任务时，不会自行产生失败邮件。
 
 GitHub 官方说明：[定时与时区](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)、
 [通知邮件的参与／指派原因](https://docs.github.com/en/subscriptions-and-notifications/reference/email-notification-headers)。
