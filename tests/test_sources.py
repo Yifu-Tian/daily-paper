@@ -6,6 +6,16 @@ from test_core import issue, resource
 
 
 class SourceTests(unittest.TestCase):
+    def test_old_paper_is_labelled_older_but_recent_revision_is_preserved(self):
+        data = issue()
+        data['papers'][0]['category'] = 'core'
+        evidence = {'sources': [], 'failures': []}
+        finalize_coverage(data, evidence)
+        self.assertEqual(data['papers'][0]['category'], 'foundational')
+        data['papers'][0].update(category='update', version_date='2026-10-17')
+        finalize_coverage(data, evidence)
+        self.assertEqual(data['papers'][0]['category'], 'update')
+
     def test_overview_uses_reviewed_evidence_and_unwatched_talk_stays_metadata(self):
         data = issue()
         data['overview'] = 'Unverified discovery claim, not reviewed paper evidence.'

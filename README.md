@@ -23,12 +23,17 @@ reviewer judgment，以及可迁移到 OpenArm 的机制和最小实验。通常
 1. 在 [Actions Secrets](https://github.com/Yifu-Tian/daily-paper/settings/secrets/actions)
    添加 `GEMINI_API_KEY`。密钥只放在 Secret，不能写入代码、Issue 或提交。
 2. 在 [GitHub Notifications](https://github.com/settings/notifications) 开启参与／被 @ 的邮件通知。
-   如果要指定 GWU 邮箱，先确认该邮箱已在 GitHub 验证，再配置通知默认邮箱或该仓库的 Custom routing。
+   如果要指定 GWU 邮箱，先在 [Emails](https://github.com/settings/emails) 添加并验证它，
+   再将 **Default notifications email** 设为该邮箱；这也会影响其他个人仓库的通知。
+   Custom routing 按组织配置，不能为这个个人仓库单独选择收件邮箱。
 3. 打开 [Daily Research Radar](https://github.com/Yifu-Tian/daily-paper/actions/workflows/radar.yml)，
    选择 **Run workflow → sample**，测试图文 Issue 和 GitHub 官方邮件通知；
    选择 **full** 则立即执行一次真实检索、全文阅读和发布。
 
 初次推送会自动测试样刊。样刊核读日期明确标注，不假装是当天新论文；重复运行不重复创建 Issue。
+需要重测邮箱投递时，运行 [Notification Test](https://github.com/Yifu-Tian/daily-paper/actions/workflows/notification.yml)，
+填写已发布的日报 Issue 编号。机器人会在该 Issue 下重发完整图文评论并 @你；每次新的手动运行
+产生一次测试通知，同一次运行重试会避免重复评论。邮件实际去向仍由账号通知设置决定。
 常规运行直接查询 arXiv API、GitHub 搜索和配置的作者／项目页，再把实际取得的材料及原始 PDF
 交给 Gemini Interactions API，
 阅读全文、图表与实验，输出结构化分析。Reviewer 判断另用原始 PDF 在新上下文中生成，
@@ -64,5 +69,7 @@ GitHub 官方说明：[定时与时区](https://docs.github.com/en/actions/refer
 本地 Git 凭据需要被授权访问这个新仓库。若推送返回 HTTP 403，请在
 [Fine-grained tokens](https://github.com/settings/personal-access-tokens) 中把仓库加入该 token 的
 Repository access，并给予 Contents、Workflows、Actions、Secrets 的读写权限。
+Resource owner 必须是 **Yifu-Tian**；仅授权 `epic-lab-gwu` 组织的 token 无法写入这个个人仓库，
+即使它选择了 All repositories。为本项目配置独立的本地 Git 凭据可以保留其他组织项目的凭据。
 这些是推送、触发／检查运行和加密设置 API Secret 所需的部署权限，不是发送日报时的权限。
 工作流本身只使用仓库提供的 `GITHUB_TOKEN`，权限为 Contents 与 Issues；不保存个人 Git token。

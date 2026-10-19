@@ -36,7 +36,7 @@
       0.835,
       0.235
     ],
-    "caption": "仿真环境下4类动态抓取任务（抛物接球Catch、传送带Conveyor、转盘Turntable、斜面下滑Ramp）的定量对比结果。表中报告了所有试验的整体成功率（SR %，越大越好），以及仅在成功试验下的路径长度（PL m）与完成时间（TCT s）。PAF-Grasp在所有任务上均大幅压制包括π0、π0.5、GR00T N1.7在内的反应式基线，整体平均成功率从24.5%飞跃至62.0%。",
+    "caption": "Table 1 比较四项仿真动态任务。SR 为全部试验的成功率（%，越高越好）；PL 与 TCT 分别为成功试验的路径长度（m）和完成时间（s，越低越好），不能脱离成功率比较。PAF-Grasp 平均 SR 为 62.0%，最高基线平均值为 π0 的 24.5%；逐任务最强基线分别来自不同方法。表格支持这些测试设置下的成功率提升，并不说明每项路径或时间指标都更优。",
     "path": "media/paper_01_experiment.jpg",
     "mime_type": "image/jpeg",
     "content_id": "paper_01_experiment@ego-digest",
@@ -57,16 +57,16 @@
       0.065,
       0.06,
       0.935,
-      0.275
+      0.315
     ],
     "caption": "DRIS 框架的两阶段学习管线流程图。Step 1（左侧）：利用随机探索收集的物理参数随机化实例集合，基于 Chamfer 距离无监督预训练 PointNet 架构的 6D 实例集自编码器并冻结权重；Step 2（右侧）：在仿真环境中，每个训练轮次独立采样 N 个球体物理属性，将实例集合状态 St 输入冻结编码器压缩为隐向量 zt，随后利用平板实时倾角 ut 经由 FiLM 进行特征调制，由 MLP 动作网络输出位移与法向动作 at。该图说明了多参数实例如何在共享动作下交互，但未展现真机外部双目感知的解算过程。",
     "path": "media/paper_02_pipeline.jpg",
     "mime_type": "image/jpeg",
     "content_id": "paper_02_pipeline@ego-digest",
     "width": 1331,
-    "height": 426,
-    "bytes": 111108,
-    "sha256": "b3440b83a0f4110a74a0721ac0e8ea01c9f5bfbfe6a2c5f02f8bb3fc3ee643be"
+    "height": 505,
+    "bytes": 145386,
+    "sha256": "555ddaa40e74420e71b449ed85d09499e4fa4aaa347f354cffd5b5c50f1fde07"
   },
   {
     "owner_id": "arxiv:2605.09789v1",
@@ -80,15 +80,15 @@
       0.495,
       0.06,
       0.935,
-      0.395
+      0.415
     ],
-    "caption": "实机接球实验结果汇总。上方展示了机械臂平板成功拦截并稳定平衡从倾斜导轨释放的乒乓球的连续动作切片；下方表格对比了启发式基线 VelTrack、单实例强化学习 E2E 与本方法 DRIS 在 4 种球体（多孔硬球、橡胶球、乒乓球、海绵球）及 3 种曲率释放斜坡下的成功率统计（每组 5 次，总计 60 次）。DRIS 取得了 68% 的总成功率，显著超越基线的 5% 与 13%，但在低摩擦易滚动的海绵球和部分高速释放下仍有脱落。",
+    "caption": "Fig. 8 上方为导轨释放乒乓球的接取过程，下方为四种球、三种斜坡设置的实机成功次数（每种组合、每种策略各 5 次，即每策略共 60 次）。DRIS 为 41/60（68%），VelTrack 为 3/60（5%），E2E 为 8/60（13%）；成功率越高越好，表中未给置信区间。该结果验证了导轨释放条件下的接球与保持，不能视作随机人工抛球的同等成功率。",
     "path": "media/paper_02_experiment.jpg",
     "mime_type": "image/jpeg",
     "content_id": "paper_02_experiment@ego-digest",
     "width": 673,
-    "height": 663,
-    "bytes": 107996,
-    "sha256": "52c0212e0aac0c20f2ec4e9123cee9c11e28f596619103120833c71abe2e8127"
+    "height": 703,
+    "bytes": 115321,
+    "sha256": "fd4ddba2525d8d70bad629fd1d3c9d9094e54b3c0fbb7159cb86f14fa50ef1a0"
   }
 ]

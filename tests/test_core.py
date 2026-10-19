@@ -50,6 +50,13 @@ class DigestTests(unittest.TestCase):
     def test_canonical_arxiv_version(self):
             self.assertEqual(RUN.canonical_id("https://arxiv.org/pdf/2602.22733v2"), "arxiv:2602.22733")
 
+    def test_reject_multiple_older_foundational_papers(self):
+            data = issue()
+            data["papers"][0]["category"] = "foundational"
+            data["papers"].append({**data["papers"][0], "id": "title:other", "title": "Other"})
+            with self.assertRaisesRegex(ValueError, "At most one older"):
+                RUN.validate_digest(data, self.config, data["date"])
+
     def test_accept_valid_and_empty_issue(self):
             RUN.validate_digest(issue(), self.config, "2026-10-18")
             empty = issue()

@@ -58,6 +58,8 @@ def validate_digest(data: dict[str, Any], config: dict[str, Any], issue_date: st
     papers = data["papers"]
     if len(papers) > config["max_papers"]:
         raise ValueError("Too many papers")
+    if sum(paper["category"] == "foundational" for paper in papers) > 1:
+        raise ValueError("At most one older foundational paper is allowed per digest")
     if not data["overview"].strip() or not data["search_queries"]:
         raise ValueError("Missing overview or search provenance")
     previous = {canonical_id(p["id"]) for p in seen_papers(config)}

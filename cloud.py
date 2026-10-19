@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import base64
+from datetime import date
 import hashlib
 import json
 import os
@@ -71,6 +72,10 @@ def review_paper(config: dict[str, Any], paper: dict[str, Any], pdf: bytes, text
 
 def finalize_coverage(data: dict[str, Any], evidence: dict[str, Any]) -> None:
     """Build the overview from reviewed papers and the actual retrieval record."""
+    issue_day = date.fromisoformat(data['date'])
+    for paper in data['papers']:
+        if (issue_day - date.fromisoformat(paper['version_date'])).days > 30:
+            paper['category'] = 'foundational'
     overview = [f"本期 {len(data['papers'])} 篇全文精读、{len(data.get('resources', []))} 组补充资源。"]
     for paper in data['papers']:
         overview.append(paper['title'] + '：' + paper['formulation'].split('。')[0] + '。' +
