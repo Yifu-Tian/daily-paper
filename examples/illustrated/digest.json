@@ -1,0 +1,395 @@
+{
+  "date": "2026-10-19",
+  "overview": "本轮未核验到近 7 天内未交付、适合深读的机载视觉动态接取新论文；扩展至 30 天后，新增线索主要涉及接触反馈与高速抓取。先补读 1 篇较早的 Pixel2Catch，明确其使用外置相机；随后提供 8 组补充资源。对 OpenArm 最有价值的共同问题是：分别验证拦截接触、闭夹时机和接触后保持。",
+  "search_notes": "优先检索 2026-10-12—2026-10-19，随后扩展至 2026-09-19—2026-10-19；直接核对 arXiv 版本记录、作者项目页、RSS proceedings、Berkeley Hybrid Robotics、ETH RSL/UZH RPG 相关来源及 OpenArm 官方 releases。search_queries 记录主要实际执行的检索式。本轮是有边界的公开来源检索，不代表互联网完整普查。Physics-Aware SE(3) Forecasting、Workhorse、Reflex 和 Outcome-Sensitive Motion Search 均未查到超过已交付记录的新 arXiv 版本。Pixel2Catch 已核读 arXiv v1 的完整方法、实验和结论；其项目页扩展实验单列，未混入 v1 结果。X 检索仅获得部分转载缓存，未获得可核验的原始 status 正文，故未制作推文卡。视频未能播放或获取 transcript；有关内容只依据明确标注的官方配文或活动说明。未核验到可单独交付的新 slides、podcast 或数据集发布。",
+  "search_queries": [
+    "robot catching onboard camera dynamic grasping October 2026 arxiv",
+    "robot catching interception vision arxiv \"2026\" \"October\"",
+    "\"Pixel2Catch\" 2602.22733",
+    "robot \"catching\" \"onboard\" after:2026-10-11 before:2026-10-20",
+    "robot \"dynamic grasping\" arxiv after:2026-09-18 before:2026-10-20",
+    "\"visual\" \"interception\" robot uncertainty latency catching 2026",
+    "\"In View or Out of View\" robot",
+    "robot catching \"2026\" \"Oct 1\" camera",
+    "\"robotic catching\" \"2026\" September October",
+    "\"interception\" \"robot\" \"camera\" after:2026-10-11 before:2026-10-20",
+    "\"catching\" \"robot\" \"latency\" after:2026-09-18 before:2026-10-20",
+    "\"robot catching\" \"2026\" site:x.com",
+    "\"dynamic grasping\" \"2026\" site:github.com",
+    "\"Reflex\" \"catching\" site:x.com",
+    "\"Workhorse\" \"robot\" site:x.com",
+    "\"catching\" site:rsl.ethz.ch 2026",
+    "\"catching\" site:rpg.ifi.uzh.ch 2026",
+    "\"catching\" \"2026\" \"Tsinghua\" robot",
+    "\"OpenArm\" \"release\" \"2026\"",
+    "\"FastGrasp: Learning-based\"",
+    "\"Tactile Sensing-based Secure and Gentle Grasping\"",
+    "\"robot\" \"catching\" \"September\" \"2026\" arxiv retention",
+    "\"Workhorse\" \"Songbo\" \"twitter\"",
+    "\"AthenaZero\" robot",
+    "\"ego\" \"catching\" \"2026\" camera arxiv",
+    "\"robot catching\" \"October 2026\" video talk seminar",
+    "\"dynamic grasping\" \"October 2026\" occlusion uncertainty",
+    "\"Pixel2Catch\" project video",
+    "\"Workhorse\" \"songbo_\" status",
+    "\"Reflex\" \"Taoyang Jia\" x.com",
+    "\"catching\" \"2026\" site:youtube.com/@RoboticsSystemsLab",
+    "\"catching\" \"seminar\" \"2026\" robot camera",
+    "\"catching\" \"CoRL\" \"2026\" video",
+    "\"catching\" \"IROS 2026\" \"video\"",
+    "\"catching\" \"RSS 2026\" robot talk",
+    "\"Zero-Shot Sim-to-Real Robot Learning\" \"Reactive Catching\"",
+    "\"Reflex\" \"DJiafei\" \"status\"",
+    "\"Songbo\" \"Workhorse\" \"x.com\" \"status\"",
+    "site:rai-inst.com AthenaZero dynamic manipulation \"2026\"",
+    "site:rai-inst.com AthenaZero \"September\"",
+    "\"catching\" \"prediction\" \"retention\" robot after:2026-10-11 before:2026-10-20",
+    "\"sim-to-real\" \"catching\" after:2026-09-18 before:2026-10-20",
+    "\"Learning a Kinodynamic Trajectory Manifold\"",
+    "\"catching\" \"arxiv\" \"2026-10-1\"",
+    "\"uncertainty\" \"interception\" \"onboard\" robot arxiv 2026",
+    "\"seongdrgn\" \"system_overview.jpg\"",
+    "\"Pixel2Catch\" \"training_curves\"",
+    "\"OpenArm Hardware 2.0.0\" \"Sep 9, 2026\"",
+    "\"OpenArm Hardware 2.0.0\" \"2026-09-09\"",
+    "\"DGBench\" \"Queensland\" \"2022\""
+  ],
+  "excluded_candidates": [
+    {
+      "title": "Physics-Aware Object-Centric SE(3) Forecasting for Real-Time Proactive Dynamic Grasping",
+      "reason": "已交付；官方 arXiv 仍仅列 2026-10-13 v1，未发现可单列的新版本：https://arxiv.org/abs/2610.17843。"
+    },
+    {
+      "title": "Workhorse: Learning Robust Whole-Body Humanoid Loco-Manipulation from Human Data",
+      "reason": "论文已交付；最新仍为 2026-10-08 v2，不重复评述。官方项目页中可独立使用的时间戳部署说明列入补充资源：https://arxiv.org/abs/2610.09117。"
+    },
+    {
+      "title": "Reflex: Visually Grounded Reactive Humanoid Control",
+      "reason": "已交付；官方记录仍为 2026-10-08 v1。作者推文线索只获得转载缓存，未核验原始 status URL 与正文，不据此重写论文卡：https://arxiv.org/abs/2610.12772。"
+    },
+    {
+      "title": "Outcome-Sensitive Motion Search for Impact-Aware Dexterous Catching",
+      "reason": "已交付；官方仍为 2026-09-24 v1：https://arxiv.org/abs/2609.29020。"
+    },
+    {
+      "title": "Event-based Agile Object Catching with a Quadrupedal Robot",
+      "reason": "官方记录为 ICRA 2023，最新 arXiv 为 2023-04-06 v2；本期唯一旧文深读名额用于更接近固定机械臂 RGB 接取的 Pixel2Catch。已交付的 animated walkthrough 不重复推送：https://arxiv.org/abs/2303.17479。"
+    },
+    {
+      "title": "Learning Dynamic Grasping",
+      "reason": "研究完整手物交互动画生成，而非从机器人相机观测飞行目标并闭环拦截；标题中的 dynamic 不等同于动态接取：https://arxiv.org/abs/2610.14848。"
+    },
+    {
+      "title": "In View or Out of View? A Vision-Aware Filter that Infers and Reacts to the Human's Field of View",
+      "reason": "研究人类视野对协作规划的影响，不是机器人保持目标可见的 active vision 接取方法：https://arxiv.org/abs/2610.14577。"
+    },
+    {
+      "title": "Smooth Planning of Catch-to-Throw Movements for Robotics Systems Through Continuous C1 Trajectory Generation and State-Conditioned Release",
+      "reason": "检索命中 2026-09-28 的出版记录，但出版社页面访问失败，未获得可核读全文；不能根据摘要分析其接取与释放模块：https://www.journals.su.edu.ye/index.php/jast/en/article/view/3285。"
+    },
+    {
+      "title": "When Does Touch Matter? Charting the Vision-Interaction Gap in Cluttered Dexterous Grasping",
+      "reason": "一个聚合检索结果将 arXiv:2609.24068 描述为 interception/optimal stopping；官方页面实际是 cluttered dexterous grasping。纠正该匹配，不按动态接取论文纳入：https://arxiv.org/abs/2609.24068。"
+    },
+    {
+      "title": "CATCH — Results & Conclusion",
+      "reason": "可见检索摘要包含工程失败讨论，但打开原站跳转 Google 登录，作者、日期与完整内容未能核验，未据摘要制作技术博客卡：https://sites.google.com/berkeley.edu/catch/results-conclusion。"
+    },
+    {
+      "title": "Whole-Body Coordination for Dynamic Object Grasping with Legged Manipulators — DQ-Net / DQ-Bench",
+      "reason": "发现官方项目与训练代码，但本期未深读；四足全身协调与双视角学生网络的迁移成本较高，优先保留直接服务固定 OpenArm 的接取、接触保持和相机布局资源。原始入口：https://kolakivy.github.io/DQ/；https://github.com/YoungYNG/DQ_WBC。"
+    },
+    {
+      "title": "Learning a Kinodynamic Trajectory Manifold for Impact-Aware Compliant Catching of Fast-Moving Objects",
+      "reason": "核验为 2026-05-27 旧预印本，已查看作者信息与问题说明，但未完成实验深读；不挤占唯一旧文分析名额，也不转述二手报道中的成功率或冲击力数值：https://arxiv.org/abs/2605.28462。"
+    },
+    {
+      "title": "Spatiotemporal Agility: Time-Constrained Reinforcement Learning for Vision-Guided Dynamic Quadrupedal Interception",
+      "reason": "官方记录为 2026-08-07 v1，未发现近期版本；采用多相机感知与四足到达控制，本期未完成全文核读，不制作模块评述：https://arxiv.org/abs/2608.06907。"
+    },
+    {
+      "title": "Catching on Optical Expansion: Inside Pixel2Catch's Monocular Sim-to-Real Pipeline",
+      "reason": "发现第三方 podcast 元数据，但未核验其与作者团队的关系，也未取得音频或 transcript；不将其作为作者原始解说或论文证据。"
+    },
+    {
+      "title": "Pixel2Catch simulation training repository；OpenArm 01 Release 1.1；IROS 2026 athletic-humanoid workshop",
+      "reason": "均命中已交付资源记录。本期保留必要的关联链接，但不重新制作相同资源卡；未发现可核验的新增 release、录播或实质更新。"
+    }
+  ],
+  "papers": [
+    {
+      "id": "arxiv:2602.22733",
+      "title": "Pixel2Catch: Multi-Agent Sim-to-Real Transfer for Agile Manipulation with a Single RGB Camera",
+      "authors": "Seongyong Kim, Junhyeon Cho, Kang-Won Lee, Soo-Chul Lim",
+      "institutions": [
+        "Dongguk University"
+      ],
+      "publication": "IEEE Robotics and Automation Letters, 2026；arXiv 书目、作者项目页和官方代码公告一致。本期核读 arXiv v1，未取得 IEEE 最终版全文。",
+      "first_posted": "2026-02-26",
+      "version_date": "2026-02-26，v1；本期旧文补读，不是近期新闻",
+      "reading_level": "full_text",
+      "category": "foundational",
+      "arxiv_url": "https://arxiv.org/abs/2602.22733",
+      "pdf_url": "https://arxiv.org/pdf/2602.22733",
+      "project_url": "https://seongdrgn.github.io/pixel2catch/",
+      "code_url": "https://github.com/seongdrgn/pixel2catch-github",
+      "formulation": "外置视觉的相邻工作。机器人从连续 RGB 图像的目标像素特征及自身状态，直接生成臂、手关节命令，以接住飞行物并避免掉落。部署不显式恢复物体三维坐标；成功依赖训练覆盖的相机几何、物体与投掷分布，不能据此认为单目尺度歧义已被普遍解决。",
+      "sensing_and_actions": "UR5e 六关节臂配 Allegro Hand，固定三个手关节、控制其余十三个。D435 固定在环境中，位于机器人后方约 0.5 m、上方约 2.2 m，仅使用 RGB；不是 wrist/head-mounted camera。策略使用本体状态，部署链未要求物体 mocap/markers；仿真真实物体状态供训练 critic 和奖励使用。[§III、Fig. 2](https://arxiv.org/pdf/2602.22733#page=3)",
+      "pipeline": [
+        {
+          "stage": "图像→运动线索",
+          "method": "SAM2 分割目标并形成包围框；按 Eq. (1) 提取中心、中心变化及宽高变化，用低维运动线索代替显式三维追踪。",
+          "input_output": "RGB→z_pixel=[cx,cy,Δcx,Δcy,Δw,Δh]∈R⁶。注意公式没有直接列入绝对 w、h。"
+        },
+        {
+          "stage": "观测→协同动作",
+          "method": "拼接连续两时刻的视觉、本体与动作信息；两个独立 MLP 分别负责手掌靠近目标和手指形成抓握，以 MAPPO 联合训练。",
+          "input_output": "历史观测→六维臂动作、十三维手动作；集中式 critic 的额外物体状态不进入部署 actor。"
+        },
+        {
+          "stage": "动作→执行",
+          "method": "臂动作加到当前关节位置，经 PD 跟踪；手动作映射到关节范围形成位置目标。接近、成功、掉落/碰撞和动作幅值奖励共同塑造行为。",
+          "input_output": "关节目标→ROS2 控制，策略命令为 30 Hz；这不是曝光到执行的端到端延迟测量。[§IV](https://arxiv.org/pdf/2602.22733#page=4)"
+        }
+      ],
+      "training": "Isaac Lab 中用五种几何体及尺寸、初始飞行状态、质量和接触参数随机化训练；图像区域角点加入最多 5 pixel 扰动。先用真实关节轨迹辨识模拟执行器，再做观测/动作与动力学随机化。仿真物理 120 Hz、策略 30 Hz；actor/critic 使用 [512,256,128] MLP。部署无策略微调，但并非没有真实数据或预训练视觉模型。[§III-C、IV-E/F、Table I](https://arxiv.org/pdf/2602.22733#page=5)",
+      "results": [
+        {
+          "evidence": "仿真 seen/unseen 物体的接取成功率分别为 84.13±0.50% / 84.83±1.17%；单策略 PPO 为 63.50±0.85% / 65.44±2.25%，Only-Center 为 81.27±0.76% / 80.72±0.38%。结果跨 3 seeds 汇总；协议为每策略在 100 个并行环境各执行 10 次。",
+          "source_anchor": "[§V、Table II，PDF 第6页](https://arxiv.org/pdf/2602.22733#page=6)"
+        },
+        {
+          "evidence": "真机每物体报告 30 trials。Cube/L-block/Triangle 的接触率为 73/73/70%，接取成功率为 63/43/43%；单策略 PPO 的成功率为 33/20/20%，Only-Center 为 13/3/23%。这是论文表中百分比，未反推原始成功次数；置信区间、明确保持时长和端到端延迟未报告。",
+          "source_anchor": "[§V-D、Table III，PDF 第7页](https://arxiv.org/pdf/2602.22733#page=7)"
+        }
+      ],
+      "analysis": "实验支持低维视觉线索结合臂手分工可实现 RGB-only sim-to-real 接取；接触率明显高于成功率，说明到达目标与接触后保持应分别诊断。作者将部分失败归因于尺度线索不足及投掷分布差异，但没有独立隔离全部原因。我的推断：非球物体旋转也会改变包围框尺度，不能把 Δw、Δh 单独解释成深度速度；移动腕部相机还会引入 ego-motion。",
+      "reviewer": {
+        "contribution": "贡献在于紧凑像素表示、异构臂手策略及完整真机迁移组合，而非一般性的三维可观测性结论。",
+        "strength": "同时提供视觉消融、单/多策略比较、仿真多 seeds 和真实投掷实验。",
+        "evidence_gap": "SAM2 初始化、端到端延迟和追踪失败未量化；保持成功标准不够具体。真机每物体样本量有限且未提供置信区间，现有结果不足以分解跟踪、拦截、闭夹和保持各阶段的失败。",
+        "comparison": "内部消融有用，但单/多策略比较同时改变奖励与观测分工，不能纯归因于 MAPPO。v1 未比较显式三维追踪加 IK/MPC；项目页另有扩展基线，不能回填为 v1 证据。",
+        "judgement": "这是有实物证据的方法参考；其外置相机和灵巧手条件限制了向 OpenArm 平行夹爪的直接迁移。现有证据不足以支持广泛相机布局或延迟鲁棒性结论。"
+      },
+      "openarm_relevance": "可迁移的是像素特征基线及“接触/保持”分项评价。建议先在相同投掷集比较胸部固定 RGB 像素策略、RGB-D ballistic tracking＋IK，以及接触后定时闭夹；另测保持 1 s 的成功率和延迟敏感性。1 s 是建议的实验标准。换成腕部相机需加入相机运动信息；平行夹爪上不应预设双 agent 必然优于单策略。",
+      "sources": [
+        "https://arxiv.org/abs/2602.22733",
+        "https://arxiv.org/pdf/2602.22733",
+        "https://arxiv.org/html/2602.22733v1",
+        "https://seongdrgn.github.io/pixel2catch/",
+        "https://github.com/seongdrgn/pixel2catch-github",
+        "https://doi.org/10.1109/LRA.2026.3703582"
+      ],
+      "figures": [
+        {
+          "role": "pipeline",
+          "figure_label": "Fig. 2",
+          "image_url": "",
+          "source_url": "https://arxiv.org/pdf/2602.22733#page=3",
+          "pdf_page": 3,
+          "bbox": [
+            0.165,
+            0.064,
+            0.875,
+            0.354
+          ],
+          "caption": "完整方法与硬件配置：连续两时刻的臂/手专属状态及共享像素、末端状态输入两个独立策略，仿真中通过 MAPPO 协同训练；特权物体信息仅供价值网络训练。策略分别输出6维臂动作和13维手动作。真机使用外置单 RGB 相机，标注安装位置为机器人后方0.5 m、上方2.2 m。此图说明训练与执行结构，不提供定量性能证据。"
+        },
+        {
+          "role": "experiment",
+          "figure_label": "Table III",
+          "image_url": "",
+          "source_url": "https://arxiv.org/pdf/2602.22733#page=7",
+          "pdf_page": 7,
+          "bbox": [
+            0.505,
+            0.537,
+            0.916,
+            0.758
+          ],
+          "caption": "真机结果：比较 Only-WH、Only-Center、单智能体 S-A RL 与 Proposed，列为 Cube、L-block、Triangle。T.R. 衡量手掌接触物体，S.R. 要求接触后稳定抓住且不掉落，单位均为%，越高越好。Proposed 的 T.R. 为73/73/70，S.R. 为63/43/43；S-A RL 的 S.R. 为33/20/20。每物体报告30次试验，未报告置信区间或明确保持时长；接触率不能等同于稳定接取成功率，也不能据此证明长期保持能力。"
+        }
+      ],
+      "figures_unavailable_reason": ""
+    }
+  ],
+  "resources": [
+    {
+      "id": "paper_link:arxiv:2604.12879:v2",
+      "title": "FastGrasp — v2 中的接触触发收紧与部署滤波",
+      "kind": "paper_link",
+      "creator": "Heng Tao, Yiming Zhong, Zemin Yang, Yuexin Ma",
+      "affiliation": "ShanghaiTech University",
+      "published_at": "2026-09-27，arXiv v2；首次发布为2026-04-14",
+      "access_url": "https://arxiv.org/abs/2604.12879",
+      "related_paper_url": "https://arxiv.org/pdf/2604.12879v2",
+      "source_level": "partial",
+      "summary": "未全文精读；已查看 §III、方法概述和 §V-D。腕部 D435i 提供 RGB-D，二值触觉既参与策略学习，也在部署时触发手指进一步收紧；后者是独立的执行规则。v2 位于30天窗口，但未逐版核验新增内容。[原文](https://arxiv.org/html/2604.12879v2)",
+      "research_relevance": "可作为 OpenArm 接触后闭夹的简单基线：视觉负责接近，接触信号触发保持。对象初始放在桌上、机器人移动，因此不是飞行物接取验证。",
+      "judgement": "有用之处是把学习策略、命令滤波和接触触发规则写清；不能将性能全部归因于策略网络。平行夹爪上的触发阈值、反弹和夹持延迟仍须重测。",
+      "access_notes": "公开英文全文；[项目页](https://taoheng-star.github.io/fastgrasp-page/)可访问。未观看演示，未对实验作完整审查。",
+      "sources": [
+        "https://arxiv.org/abs/2604.12879",
+        "https://arxiv.org/html/2604.12879v2",
+        "https://taoheng-star.github.io/fastgrasp-page/"
+      ],
+      "figures": [],
+      "figures_unavailable_reason": "补充阅读线索，本卡不附未经视觉核验的图片。"
+    },
+    {
+      "id": "paper_link:arxiv:2610.12790",
+      "title": "Tactile Sensing-based Secure and Gentle Grasping of Unknown Objects",
+      "kind": "paper_link",
+      "creator": "Feng Han",
+      "affiliation": "Department of Mechanical Engineering, New York Institute of Technology",
+      "published_at": "2026-10-08，arXiv v1，预印本",
+      "access_url": "https://arxiv.org/abs/2610.12790",
+      "related_paper_url": "https://arxiv.org/pdf/2610.12790",
+      "source_level": "partial",
+      "summary": "未全文精读；已查看摘要、系统定义与假设。单通道 FSR 反馈配合探测有限状态机、在线 Gaussian Process 和受约束 MPC，试图辨识防滑与避免压坏的力界限。其假设包括目标初始已与夹爪工作空间相交。[§II](https://arxiv.org/html/2610.12790v1)",
+      "research_relevance": "针对 OpenArm 接住后滑落，可研究低成本接触力反馈；这是 retention 环节的候选机制，不能替代接触前视觉预测，也不能默认缓慢探测过程适用于瞬时碰撞。",
+      "judgement": "物理约束显式化值得关注，但尚未核读实验与理论条件，不能据此确认对冲击接取有效；单通道法向反馈也不直接观测切向滑移。",
+      "access_notes": "公开英文 HTML/PDF。已核验作者单位；未核验正式接收、代码或演示发布。",
+      "sources": [
+        "https://arxiv.org/abs/2610.12790",
+        "https://arxiv.org/html/2610.12790v1"
+      ],
+      "figures": [],
+      "figures_unavailable_reason": "仅作为未深读论文线索，不附图。"
+    },
+    {
+      "id": "url:hybridrobotics.github.io/workhorse:deployment",
+      "title": "Workhorse — 按图像时间戳执行异步 action chunks",
+      "kind": "demo",
+      "creator": "Songbo Hu, Qiayuan Liao, Yufeng Chi, Kevin Zakka, Yakun Sophia Shao, Pieter Abbeel, Koushil Sreenath",
+      "affiliation": "University of California, Berkeley",
+      "published_at": "项目页未标更新日期；关联论文首次发布2026-10-06，最新v2为2026-10-08",
+      "access_url": "https://hybridrobotics.github.io/workhorse/#deployment",
+      "related_paper_url": "https://arxiv.org/abs/2610.09117",
+      "source_level": "full_text",
+      "summary": "已读项目页文字，未观看视频。本卡补充部署实现：预测 chunk 从最新图像曝光对应的 t0 开始，收到时跳过已过期动作；tracker 按时间戳读取未来片段。页面还解释了训练中的命令漂移和相机视角扰动。[Deployment](https://hybridrobotics.github.io/workhorse/#deployment)",
+      "research_relevance": "可直接启发 OpenArm：给图像、目标状态和动作统一记录有效时间，执行时补偿观测年龄；比较按曝光时间与按推理完成时间索引的拦截误差。",
+      "judgement": "这是值得实现的时间对齐机制，不是已验证的 OpenArm 接取结论。页面的定量仿真主要针对箱子搬运，不应移作箱子接取成功率；页面明确代码尚未发布。",
+      "access_notes": "公开英文项目页；[原始视频入口](https://hybridrobotics.github.io/workhorse/)保留。未确认页面有新于已读论文的更新，不将其包装为新版本。",
+      "sources": [
+        "https://hybridrobotics.github.io/workhorse/",
+        "https://arxiv.org/abs/2610.09117"
+      ],
+      "figures": [],
+      "figures_unavailable_reason": "项目包含交互式组合展示；本卡未提取其中单张照片冒充完整方法图。"
+    },
+    {
+      "id": "url:seongdrgn.github.io/pixel2catch:expanded-results",
+      "title": "Pixel2Catch — 项目页扩展投掷者/背景实验",
+      "kind": "demo",
+      "creator": "Seongyong Kim, Junhyeon Cho, Kang-Won Lee, Soo-Chul Lim",
+      "affiliation": "Dongguk University",
+      "published_at": "项目页扩展结果发布日期未标注；不是已核验的近期更新",
+      "access_url": "https://seongdrgn.github.io/pixel2catch/",
+      "related_paper_url": "https://arxiv.org/abs/2602.22733",
+      "source_level": "full_text",
+      "summary": "已读项目文字和表格，未观看视频。相比本期核读的 arXiv v1，页面列出每策略360次实验：3物体×2投掷者×2背景×30次，并增加3D Pos基线。Proposed 的三物体成功率报告为60.60±4.30%、51.27±6.60%、46.60±4.77%。[Real-World Performance](https://seongdrgn.github.io/pixel2catch/)",
+      "research_relevance": "适合借鉴 OpenArm 的投掷者×背景交叉测试；同一策略跨条件评估，避免把单一投掷习惯当成泛化。",
+      "judgement": "扩展协议比单场景更有信息，但页面未清楚定义±的统计汇总方式，也未给更新日期；不能与v1的30次表格合并。仿真oracle三维状态与真机3D Pos也不能视为同一种观测。",
+      "access_notes": "公开英文页面。[作者视频](https://www.youtube.com/watch?v=kV10T-2zh5w)未能播放，时长和语种未核验；不重复推送已交付的训练仓库卡。",
+      "sources": [
+        "https://seongdrgn.github.io/pixel2catch/",
+        "https://www.youtube.com/watch?v=kV10T-2zh5w",
+        "https://arxiv.org/html/2602.22733v1"
+      ],
+      "figures": [],
+      "figures_unavailable_reason": "官方图片链接已发现，但本轮抓取失败，未完成视觉核验。"
+    },
+    {
+      "id": "url:rice-robotpi-lab.github.io/DRIScatch",
+      "title": "DRIS — Reactive Catching on a Flat Plate",
+      "kind": "demo",
+      "creator": "Kejia Ren, Gaotian Wang, Andrew S. Morgan, Kaiyu Hang",
+      "affiliation": "Rice University；Robotics and AI Institute",
+      "published_at": "较早资源：关联论文首次发布2026-05-10；RSS 2026；项目页日期未标注",
+      "access_url": "https://rice-robotpi-lab.github.io/DRIScatch/",
+      "related_paper_url": "https://arxiv.org/abs/2605.09789",
+      "source_level": "full_text",
+      "summary": "已读项目页文字，论文尚未全文精读、视频未观看。训练时让一组不同物理参数的实例接受同一动作，以集合编码形成策略输入；部署使用单个观测。FR3以平板接球并稳定；项目报告DRIS为41/60，E2E为8/60，手工VelTrack为3/60。[Real-Robot Deployment](https://rice-robotpi-lab.github.io/DRIScatch/)",
+      "research_relevance": "与 OpenArm tray catching 直接相关：平板缺少篮筐被动约束，必须控制接触后的平移和倾角。建议在仿真比较平板、带边托盘、篮筐，并分别测初次接触、反弹与保持。",
+      "judgement": "这是作者项目报告，非独立复现。主要定量协议是四种球和三种滑道条件；不能当作随机人抛接球成功率。页面称双相机估计球状态，但本卡未核验其安装位置。",
+      "access_notes": "公开英文项目；[RSS原始出版记录](https://www.roboticsproceedings.org/rss22/p148.html)验证正式发表。项目提供视频入口，本轮未获取播放内容；未核验代码发布。",
+      "sources": [
+        "https://rice-robotpi-lab.github.io/DRIScatch/",
+        "https://www.roboticsproceedings.org/rss22/p148.html",
+        "https://arxiv.org/abs/2605.09789"
+      ],
+      "figures": [],
+      "figures_unavailable_reason": "补充项目资源，不附未经视觉核验的图像。"
+    },
+    {
+      "id": "github:enactic/openarm_hardware:release:2.0.0",
+      "title": "OpenArm — Hardware 2.0.0 与 ROS 2 0.9.2 的版本边界",
+      "kind": "code",
+      "creator": "Enactic / OpenArm maintainers",
+      "affiliation": "Enactic",
+      "published_at": "较早资源：Hardware 2.0.0为2026-09-09；ROS 2 0.9.2为2026-01-26",
+      "access_url": "https://github.com/enactic/openarm_hardware/releases/tag/2.0.0",
+      "related_paper_url": "",
+      "source_level": "release_notes",
+      "summary": "已读两个官方 release notes 和相关PR。硬件2.0.0更新发布归档及文件来源；PR #42明确区分 OpenArm 2.0、Cell、KER，并说明GitHub release是Google Drive镜像。[ROS 2 0.9.2](https://github.com/enactic/openarm_ros2/releases/tag/0.9.2)包含PD gains修改、降低gain与可配置gain。",
+      "research_relevance": "建立 OpenArm 接取仿真前，应冻结机械版本、URDF/MJCF、执行器与控制增益组合。对拦截时序而言，真实关节响应差异可能比策略推理时间更关键。",
+      "judgement": "这些是可复现输入与控制接口信息，不是动态接取性能验证；不能仅凭硬件和ROS仓库各自的latest标签假定跨版本兼容。",
+      "access_notes": "公开英文 GitHub 页面；未下载或测试CAD归档及驱动。与已交付的 enactic/openarm 1.1 release 不同。ROS关联资源ID：github:enactic/openarm_ros2:release:0.9.2。",
+      "sources": [
+        "https://github.com/enactic/openarm_hardware/releases/tag/2.0.0",
+        "https://github.com/enactic/openarm_hardware/pull/42",
+        "https://github.com/enactic/openarm_ros2/releases/tag/0.9.2",
+        "https://github.com/enactic/openarm_ros2/discussions/81"
+      ],
+      "figures": [],
+      "figures_unavailable_reason": "版本与控制说明无需配图。"
+    },
+    {
+      "id": "github:BenBurgessLimerick/DGBench",
+      "title": "DGBench — 可重复动态轨迹与感知/控制失败分类",
+      "kind": "code",
+      "creator": "Ben Burgess-Limerick, Chris Lehnert, Jurgen Leitner, Peter Corke",
+      "affiliation": "Queensland University of Technology Centre for Robotics；LYRO Robotics",
+      "published_at": "较早工具：关联论文首次发布2022-04-29，v2为2022-07-13；仓库首次发布日期未核验",
+      "access_url": "https://github.com/BenBurgessLimerick/DGBench",
+      "related_paper_url": "https://arxiv.org/abs/2204.13879",
+      "source_level": "full_text",
+      "summary": "已读仓库README，并核验论文作者单位；未全文精读论文。仓库提供CoreXY平台CAD、固件和ROS控制，用相同轨迹比较相机布局；示例区分成功、目标离开视野造成的感知失败，以及仍在追踪时发生的控制失败。[Example Experiment](https://github.com/BenBurgessLimerick/DGBench)",
+      "research_relevance": "可先在 OpenArm 仿真复现可重复移动目标，比较胸部RGB-D与腕部RGB/D，并记录最后可见时刻至闭夹的间隔；避免只报告总成功率而无法定位遮挡问题。",
+      "judgement": "价值主要是实验协议和相机近接触可见性；它是平面运动抓取工具，不能替代空中弹道、碰撞吸收或接后保持测试。",
+      "access_notes": "公开英文README、CAD与代码；仓库标示MIT license。未安装或运行，不能据文件存在宣称当前环境可复现。",
+      "sources": [
+        "https://github.com/BenBurgessLimerick/DGBench",
+        "https://arxiv.org/abs/2204.13879",
+        "https://arxiv.org/pdf/2204.13879"
+      ],
+      "figures": [],
+      "figures_unavailable_reason": "本卡聚焦可执行协议，未附未经视觉核验的仓库图片。"
+    },
+    {
+      "id": "url:rai-inst.com:athenazero:2026-04-07",
+      "title": "AthenaZero — 低有效质量、接触阻抗与机载视觉 juggling",
+      "kind": "blog",
+      "creator": "Robotics and AI Institute；同主题讲座讲者为Andrew S. Morgan",
+      "affiliation": "Robotics and AI Institute；讲座主办方为Dartmouth Engineering",
+      "published_at": "较早资源：技术博客2026-04-07；讲座2026-05-21；juggling视频配文2026-05-27",
+      "access_url": "https://rai-inst.com/resources/blog/bimanual-robot-for-dynamic-manipulation/",
+      "related_paper_url": "https://arxiv.org/abs/2609.19194",
+      "source_level": "full_text",
+      "summary": "已读官方技术博客：通过低减速比和近端布置执行器降低有效质量，接球采用task-readiness impedance；也明确低惯量设计仍需力矩控制和加速度前馈。另读[juggling官方配文](https://rai-inst.com/resources/videos/a-new-benchmark-in-robot-juggling/)，其称使用onboard vision并直接在硬件上学习；视频本身未观看。",
+      "research_relevance": "提醒 OpenArm 将“目标预测正确却被反弹”与执行器惯量、末端速度和阻抗联系起来。可用相同拦截状态比较位置跟踪、速度匹配及柔顺接触，而非只更换视觉模型。",
+      "judgement": "博客与演示属于作者说明，不能证明该控制配置可迁移到OpenArm。机载视觉juggling是另一任务，不应据此推断棒球接取也使用相同视觉链；论文尚未全文精读。",
+      "access_notes": "公开英文博客。[原始juggling视频](https://www.youtube.com/watch?v=tAPvN-tQpX0)播放未成功，时长未核验。[Dartmouth讲座页](https://engineering.dartmouth.edu/events/athenazero-a-low-inertia-bimanual-robot-for-dynamic-manipulation)仅核验活动安排与讲者，未找到可审阅录播或transcript。",
+      "sources": [
+        "https://rai-inst.com/resources/blog/bimanual-robot-for-dynamic-manipulation/",
+        "https://rai-inst.com/resources/videos/a-new-benchmark-in-robot-juggling/",
+        "https://www.youtube.com/watch?v=tAPvN-tQpX0",
+        "https://engineering.dartmouth.edu/events/athenazero-a-low-inertia-bimanual-robot-for-dynamic-manipulation",
+        "https://arxiv.org/abs/2609.19194"
+      ],
+      "figures": [],
+      "figures_unavailable_reason": "未核验原始图像，不使用宣传照片替代接触控制证据。"
+    }
+  ]
+}

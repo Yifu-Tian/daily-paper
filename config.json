@@ -1,0 +1,28 @@
+{
+  "timezone": "America/New_York",
+  "send_at": "08:30",
+  "max_papers": 3,
+  "model": "gemini-3.8-flash",
+  "api_timeout_seconds": 300,
+  "max_output_tokens": 24576,
+  "repository": "Yifu-Tian/daily-paper",
+  "assignee": "Yifu-Tian",
+  "required_paper_figures": 2,
+  "max_figures_per_paper": 2,
+  "max_figures_per_issue": 8,
+  "already_read": [
+    {
+      "id": "arxiv:2409.10319",
+      "title": "Catch It! Learning to Catch in Flight with Mobile Dexterous Hands"
+    },
+    {
+      "id": "title:reflex",
+      "title": "Reflex: Visually Grounded Reactive Humanoid Control"
+    },
+    {
+      "id": "arxiv:2306.08205",
+      "title": "Agile Catching with Whole-Body MPC and Blackbox Policy Learning"
+    }
+  ],
+  "already_read_resources": []
+}

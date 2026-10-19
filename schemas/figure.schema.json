@@ -1,0 +1,60 @@
+{
+  "type": "object",
+  "properties": {
+    "figures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "pipeline",
+              "experiment",
+              "context"
+            ]
+          },
+          "figure_label": {
+            "type": "string"
+          },
+          "image_url": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": "string"
+          },
+          "pdf_page": {
+            "type": "integer"
+          },
+          "bbox": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "caption": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "role",
+          "figure_label",
+          "image_url",
+          "source_url",
+          "pdf_page",
+          "bbox",
+          "caption"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "figures_unavailable_reason": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "figures",
+    "figures_unavailable_reason"
+  ],
+  "additionalProperties": false
+}

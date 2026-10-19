@@ -1,0 +1,421 @@
+{
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string"
+    },
+    "overview": {
+      "type": "string"
+    },
+    "search_notes": {
+      "type": "string"
+    },
+    "search_queries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "excluded_candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "papers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "authors": {
+            "type": "string"
+          },
+          "institutions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "publication": {
+            "type": "string"
+          },
+          "first_posted": {
+            "type": "string"
+          },
+          "version_date": {
+            "type": "string"
+          },
+          "reading_level": {
+            "type": "string",
+            "enum": [
+              "full_text"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "core",
+              "adjacent",
+              "foundational",
+              "update"
+            ]
+          },
+          "arxiv_url": {
+            "type": "string"
+          },
+          "pdf_url": {
+            "type": "string"
+          },
+          "project_url": {
+            "type": "string"
+          },
+          "code_url": {
+            "type": "string"
+          },
+          "formulation": {
+            "type": "string"
+          },
+          "sensing_and_actions": {
+            "type": "string"
+          },
+          "pipeline": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "stage": {
+                  "type": "string"
+                },
+                "method": {
+                  "type": "string"
+                },
+                "input_output": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "stage",
+                "method",
+                "input_output"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "training": {
+            "type": "string"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "evidence": {
+                  "type": "string"
+                },
+                "source_anchor": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "evidence",
+                "source_anchor"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "analysis": {
+            "type": "string"
+          },
+          "reviewer": {
+            "type": "object",
+            "properties": {
+              "contribution": {
+                "type": "string"
+              },
+              "strength": {
+                "type": "string"
+              },
+              "evidence_gap": {
+                "type": "string"
+              },
+              "comparison": {
+                "type": "string"
+              },
+              "judgement": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "contribution",
+              "strength",
+              "evidence_gap",
+              "comparison",
+              "judgement"
+            ],
+            "additionalProperties": false
+          },
+          "openarm_relevance": {
+            "type": "string"
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "figures": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "pipeline",
+                    "experiment",
+                    "context"
+                  ]
+                },
+                "figure_label": {
+                  "type": "string"
+                },
+                "image_url": {
+                  "type": "string"
+                },
+                "source_url": {
+                  "type": "string"
+                },
+                "pdf_page": {
+                  "type": "integer"
+                },
+                "bbox": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "caption": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "role",
+                "figure_label",
+                "image_url",
+                "source_url",
+                "pdf_page",
+                "bbox",
+                "caption"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "figures_unavailable_reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "authors",
+          "institutions",
+          "publication",
+          "first_posted",
+          "version_date",
+          "reading_level",
+          "category",
+          "arxiv_url",
+          "pdf_url",
+          "project_url",
+          "code_url",
+          "formulation",
+          "sensing_and_actions",
+          "pipeline",
+          "training",
+          "results",
+          "analysis",
+          "reviewer",
+          "openarm_relevance",
+          "sources",
+          "figures",
+          "figures_unavailable_reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "tweet",
+              "thread",
+              "talk",
+              "video",
+              "blog",
+              "code",
+              "dataset",
+              "demo",
+              "slides",
+              "podcast",
+              "paper_link",
+              "other"
+            ]
+          },
+          "creator": {
+            "type": "string"
+          },
+          "affiliation": {
+            "type": "string"
+          },
+          "published_at": {
+            "type": "string"
+          },
+          "access_url": {
+            "type": "string"
+          },
+          "related_paper_url": {
+            "type": "string"
+          },
+          "source_level": {
+            "type": "string",
+            "enum": [
+              "full_text",
+              "transcript",
+              "video_reviewed",
+              "post_text",
+              "release_notes",
+              "metadata_only",
+              "partial"
+            ]
+          },
+          "summary": {
+            "type": "string"
+          },
+          "research_relevance": {
+            "type": "string"
+          },
+          "judgement": {
+            "type": "string"
+          },
+          "access_notes": {
+            "type": "string"
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "figures": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "pipeline",
+                    "experiment",
+                    "context"
+                  ]
+                },
+                "figure_label": {
+                  "type": "string"
+                },
+                "image_url": {
+                  "type": "string"
+                },
+                "source_url": {
+                  "type": "string"
+                },
+                "pdf_page": {
+                  "type": "integer"
+                },
+                "bbox": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "caption": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "role",
+                "figure_label",
+                "image_url",
+                "source_url",
+                "pdf_page",
+                "bbox",
+                "caption"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "figures_unavailable_reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "kind",
+          "creator",
+          "affiliation",
+          "published_at",
+          "access_url",
+          "related_paper_url",
+          "source_level",
+          "summary",
+          "research_relevance",
+          "judgement",
+          "access_notes",
+          "sources",
+          "figures",
+          "figures_unavailable_reason"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "date",
+    "overview",
+    "search_notes",
+    "search_queries",
+    "excluded_candidates",
+    "papers",
+    "resources"
+  ],
+  "additionalProperties": false
+}

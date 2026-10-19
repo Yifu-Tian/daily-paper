@@ -1,0 +1,93 @@
+name: Daily Research Radar
+
+on:
+  schedule:
+    - cron: '0 7 * * *'
+      timezone: America/New_York
+    - cron: '30 8 * * *'
+      timezone: America/New_York
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Prepare research, publish prepared research, run both, or test the illustrated sample
+        type: choice
+        default: full
+        options: [prepare, publish, full, sample]
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/radar.yml
+      - examples/illustrated/**
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: daily-paper-publish
+  cancel-in-progress: false
+
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Choose the requested phase
+        id: phase
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          SCHEDULE: ${{ github.event.schedule }}
+          REQUESTED_MODE: ${{ inputs.mode }}
+        run: |
+          python - <<'PY'
+          import os
+          if os.environ['EVENT_NAME'] == 'schedule':
+              mode = 'prepare' if os.environ['SCHEDULE'] == '0 7 * * *' else 'publish'
+          elif os.environ['EVENT_NAME'] == 'push':
+              mode = 'sample'
+          else:
+              mode = os.environ['REQUESTED_MODE']
+          assert mode in {'prepare', 'publish', 'full', 'sample'}
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write(f'mode={mode}\n')
+          PY
+      - name: Install PDF tools
+        if: steps.phase.outputs.mode != 'publish'
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Validate the pipeline
+        if: steps.phase.outputs.mode != 'publish'
+        run: python -m unittest discover -s tests -v
+      - name: Run the research or publication phase
+        env:
+          RADAR_MODE: ${{ steps.phase.outputs.mode }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python run.py "$RADAR_MODE" --commit
+      - name: Notify a failed run without pretending a digest completed
+        if: failure()
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          python - <<'PY'
+          import os
+          import core
+          import run
+          config = core.read_json(core.ROOT / 'config.json')
+          date = core.now(config).date().isoformat()
+          repo = config['repository']
+          marker = f'<!-- radar-failure:{date} -->'
+          issues = run.github(f'repos/{repo}/issues?state=all&per_page=100')
+          if not any(marker in (issue.get('body') or '') for issue in issues):
+              run.github(f'repos/{repo}/issues', 'POST', {
+                  'title': f'[运行失败] Research Radar · {date}',
+                  'body': marker + f"\n\n@{config['assignee']} 本次生成或推送未完成。请查看 [运行日志]({os.environ['RUN_URL']})。首次配置请确认 Actions secret `GEMINI_API_KEY` 已设置。此条是运行状态通知，不是论文日报。",
+                  'assignees': [config['assignee']],
+              })
+          PY

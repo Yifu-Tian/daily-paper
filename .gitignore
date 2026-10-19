@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+.work/
+**/attempts/
+**/*.pdf
+**/*.source
+**/preview.html
+**/digest.html
+!schemas/*.json
