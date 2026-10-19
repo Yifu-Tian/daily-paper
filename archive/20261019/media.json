@@ -1,0 +1,94 @@
+[
+  {
+    "owner_id": "arxiv:2610.17843v1",
+    "kind": "paper",
+    "role": "pipeline",
+    "figure_label": "Figure 2",
+    "image_url": "",
+    "source_url": "https://arxiv.org/pdf/2610.17843v1#page=4",
+    "pdf_page": 4,
+    "bbox": [
+      0.165,
+      0.083,
+      0.835,
+      0.385
+    ],
+    "caption": "PAF-Grasp系统完整流程图。左侧展示离线阶段利用单张RGB-D锚点图像通过SAM2分割、TRELLIS-1几何重建与Qwen3-VL密度推断获取米制网格与刚体惯量先验I^B；中间核心为基于牛顿-欧拉结构的神经ODE预测器，通过双GRU处理历史位姿与速度，并在连续时间积分输出未来SE(3)轨迹；右侧拦截选择器结合机械臂运动学与延迟裕量评估可达集并选择最优接触点。",
+    "path": "media/paper_01_pipeline.jpg",
+    "mime_type": "image/jpeg",
+    "content_id": "paper_01_pipeline@ego-digest",
+    "width": 1025,
+    "height": 598,
+    "bytes": 202471,
+    "sha256": "9cbf2c262cb6d343939f7cb3db7314ad3cd335c7d256ab80cbf46e6c7f6912b5"
+  },
+  {
+    "owner_id": "arxiv:2610.17843v1",
+    "kind": "paper",
+    "role": "experiment",
+    "figure_label": "Table 1",
+    "image_url": "",
+    "source_url": "https://arxiv.org/pdf/2610.17843v1#page=7",
+    "pdf_page": 7,
+    "bbox": [
+      0.165,
+      0.085,
+      0.835,
+      0.235
+    ],
+    "caption": "仿真环境下4类动态抓取任务（抛物接球Catch、传送带Conveyor、转盘Turntable、斜面下滑Ramp）的定量对比结果。表中报告了所有试验的整体成功率（SR %，越大越好），以及仅在成功试验下的路径长度（PL m）与完成时间（TCT s）。PAF-Grasp在所有任务上均大幅压制包括π0、π0.5、GR00T N1.7在内的反应式基线，整体平均成功率从24.5%飞跃至62.0%。",
+    "path": "media/paper_01_experiment.jpg",
+    "mime_type": "image/jpeg",
+    "content_id": "paper_01_experiment@ego-digest",
+    "width": 1025,
+    "height": 297,
+    "bytes": 92518,
+    "sha256": "0b10ad680291d207268d55eba70c7c7461bcd0269f43ab782ae53afed89f3c0d"
+  },
+  {
+    "owner_id": "arxiv:2605.09789v1",
+    "kind": "paper",
+    "role": "pipeline",
+    "figure_label": "Fig. 3",
+    "image_url": "",
+    "source_url": "https://arxiv.org/pdf/2605.09789v1#page=5",
+    "pdf_page": 5,
+    "bbox": [
+      0.065,
+      0.06,
+      0.935,
+      0.275
+    ],
+    "caption": "DRIS 框架的两阶段学习管线流程图。Step 1（左侧）：利用随机探索收集的物理参数随机化实例集合，基于 Chamfer 距离无监督预训练 PointNet 架构的 6D 实例集自编码器并冻结权重；Step 2（右侧）：在仿真环境中，每个训练轮次独立采样 N 个球体物理属性，将实例集合状态 St 输入冻结编码器压缩为隐向量 zt，随后利用平板实时倾角 ut 经由 FiLM 进行特征调制，由 MLP 动作网络输出位移与法向动作 at。该图说明了多参数实例如何在共享动作下交互，但未展现真机外部双目感知的解算过程。",
+    "path": "media/paper_02_pipeline.jpg",
+    "mime_type": "image/jpeg",
+    "content_id": "paper_02_pipeline@ego-digest",
+    "width": 1331,
+    "height": 426,
+    "bytes": 111108,
+    "sha256": "b3440b83a0f4110a74a0721ac0e8ea01c9f5bfbfe6a2c5f02f8bb3fc3ee643be"
+  },
+  {
+    "owner_id": "arxiv:2605.09789v1",
+    "kind": "paper",
+    "role": "experiment",
+    "figure_label": "Fig. 8",
+    "image_url": "",
+    "source_url": "https://arxiv.org/pdf/2605.09789v1#page=8",
+    "pdf_page": 8,
+    "bbox": [
+      0.495,
+      0.06,
+      0.935,
+      0.395
+    ],
+    "caption": "实机接球实验结果汇总。上方展示了机械臂平板成功拦截并稳定平衡从倾斜导轨释放的乒乓球的连续动作切片；下方表格对比了启发式基线 VelTrack、单实例强化学习 E2E 与本方法 DRIS 在 4 种球体（多孔硬球、橡胶球、乒乓球、海绵球）及 3 种曲率释放斜坡下的成功率统计（每组 5 次，总计 60 次）。DRIS 取得了 68% 的总成功率，显著超越基线的 5% 与 13%，但在低摩擦易滚动的海绵球和部分高速释放下仍有脱落。",
+    "path": "media/paper_02_experiment.jpg",
+    "mime_type": "image/jpeg",
+    "content_id": "paper_02_experiment@ego-digest",
+    "width": 673,
+    "height": 663,
+    "bytes": 107996,
+    "sha256": "52c0212e0aac0c20f2ec4e9123cee9c11e28f596619103120833c71abe2e8127"
+  }
+]
