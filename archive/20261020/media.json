@@ -1,0 +1,140 @@
+[
+  {
+    "owner_id": "arxiv:2609.29020v1",
+    "kind": "paper",
+    "role": "pipeline",
+    "figure_label": "Fig. 3",
+    "image_url": "",
+    "source_url": "https://arxiv.org/pdf/2609.29020v1#page=3",
+    "pdf_page": 3,
+    "bbox": [
+      0.08,
+      0.05,
+      0.92,
+      0.335
+    ],
+    "caption": "图3展示了结果敏感运动搜索（Outcome-Sensitive Motion Search）的完整框架：包含事件对齐确定关键窗口（OSW）、在条件流形上利用拉回度量进行局部测地线搜索生成候选动作片段、基于拟合的学生执行误差模型进行全轨迹鲁棒性验证，以及最终构建用于训练可部署IL学生策略的高质量数据集流程。",
+    "path": "media/paper_01_pipeline.jpg",
+    "mime_type": "image/jpeg",
+    "content_id": "paper_01_pipeline@ego-digest",
+    "width": 1285,
+    "height": 564,
+    "bytes": 177145,
+    "sha256": "d87e82920dcf8024731aa8d94789c4d898f6451be1413f30bd7fdefc5362a1f2"
+  },
+  {
+    "owner_id": "arxiv:2609.29020v1",
+    "kind": "paper",
+    "role": "experiment",
+    "figure_label": "Table II",
+    "image_url": "",
+    "source_url": "https://arxiv.org/pdf/2609.29020v1#page=8",
+    "pdf_page": 8,
+    "bbox": [
+      0.08,
+      0.055,
+      0.92,
+      0.185
+    ],
+    "caption": "表2给出了示范数据构建指标与闭环策略性能的定量对比：本方法（Ours-IL）在测试集上取得了90.3%的任务成功率与37.3 N的最低平均接触峰值力，不仅超越特权教师（85.2%, 40.8 N），而且显著优于未考虑误差扰动的Normal-IL（81.7%, 44.2 N），说明更高的无扰动示教覆盖率并不能直接转化为闭环鲁棒性。",
+    "path": "media/paper_01_experiment.jpg",
+    "mime_type": "image/jpeg",
+    "content_id": "paper_01_experiment@ego-digest",
+    "width": 1285,
+    "height": 257,
+    "bytes": 63731,
+    "sha256": "572c42083c0983386324c2e94eb32593cb170c7327e8b7fe30932498dd500c27"
+  },
+  {
+    "owner_id": "arxiv:2606.02486v2",
+    "kind": "paper",
+    "role": "pipeline",
+    "figure_label": "Figure 2",
+    "image_url": "",
+    "source_url": "https://arxiv.org/pdf/2606.02486v2#page=4",
+    "pdf_page": 4,
+    "bbox": [
+      0.15,
+      0.08,
+      0.85,
+      0.33
+    ],
+    "caption": "AHEAD系统总览图（论文Figure 2）：展示从三连续帧光流计算与有限差分加速度提取、语言/运动联合显著性Token稀疏掩码、紧凑隐空间条件流匹配（CFM）多步外推、解析运动学更新，到Token空间拼接及注入冻结OpenVLA解码动作的端到端数据流。图示清晰呈现了4.9M可学习模块与冻结VLA组件的解耦关系。",
+    "path": "media/paper_02_pipeline.jpg",
+    "mime_type": "image/jpeg",
+    "content_id": "paper_02_pipeline@ego-digest",
+    "width": 1071,
+    "height": 495,
+    "bytes": 153523,
+    "sha256": "c5e2b8868f2adb15b5ccfbb411fce50589139c4729f516ad5b1d87b4fcd5b7ea"
+  },
+  {
+    "owner_id": "arxiv:2606.02486v2",
+    "kind": "paper",
+    "role": "experiment",
+    "figure_label": "Table 4",
+    "image_url": "",
+    "source_url": "https://arxiv.org/pdf/2606.02486v2#page=8",
+    "pdf_page": 8,
+    "bbox": [
+      0.15,
+      0.26,
+      0.85,
+      0.44
+    ],
+    "caption": "UFactory xArm 7物理真机实验结果表（论文Table 4）：左侧统计了5项高动态物理操作任务中30次尝试的成功次数，AHEAD在高速抛体抓取（Catch proj.）中达成19/30，而所有基线均为0/30；右侧展示了传送带速度从0至25 cm/s的敏感性扫描（每点10次），证实基线在速度超过5 cm/s后近乎完全失效，而AHEAD在25 cm/s极限下仍保留拦截能力。",
+    "path": "media/paper_02_experiment.jpg",
+    "mime_type": "image/jpeg",
+    "content_id": "paper_02_experiment@ego-digest",
+    "width": 1071,
+    "height": 356,
+    "bytes": 111098,
+    "sha256": "fa83201c2e7020171e4bffd81122deb3a30117012acbf8004b60f24ee98db6e7"
+  },
+  {
+    "owner_id": "arxiv:2602.22733v1",
+    "kind": "paper",
+    "role": "pipeline",
+    "figure_label": "Fig. 2",
+    "image_url": "",
+    "source_url": "https://arxiv.org/pdf/2602.22733v1#page=3",
+    "pdf_page": 3,
+    "bbox": [
+      0.155,
+      0.065,
+      0.845,
+      0.412
+    ],
+    "caption": "Pixel2Catch系统流水线与仿真/真实实验布局概览。左侧展示状态空间构建：包含机械臂（18维）、灵巧手（39维）的专属本体感觉及连续两帧拼接的共享状态（16维，含末端位姿及6维像素级运动特征z_pixel），特权信息（9维，物体真值位姿与距离）仅在训练期输入中心化值网络；中间展示基于MAPPO的异构策略分解（π_arm输出6维动作控制UR5e，π_hand输出13维动作控制Allegro Hand）；右侧展示单目RGB相机架设于机器人后上方（高2.2m、后偏0.5m）的第三人称全局视点布局。",
+    "path": "media/paper_03_pipeline.jpg",
+    "mime_type": "image/jpeg",
+    "content_id": "paper_03_pipeline@ego-digest",
+    "width": 1056,
+    "height": 687,
+    "bytes": 174063,
+    "sha256": "093730bccf5b8eb540fbed145b4ed6050e1a3c14e681ba0c1623551c5e375b29"
+  },
+  {
+    "owner_id": "arxiv:2602.22733v1",
+    "kind": "paper",
+    "role": "experiment",
+    "figure_label": "TABLE III",
+    "image_url": "",
+    "source_url": "https://arxiv.org/pdf/2602.22733v1#page=7",
+    "pdf_page": 7,
+    "bbox": [
+      0.505,
+      0.535,
+      0.915,
+      0.755
+    ],
+    "caption": "实物部署中各基线方法在人类抛掷三种不同几何体（Cube、L-block、Triangle）下的性能对比（每种物体评测30次）。表中量化了手掌接触目标的跟踪率（T.R. %）与成功捕获并保持不坠落的成功率（S.R. %）。所提方法在全部三类物体上均取得最高拦截与抓取表现（S.R.达43%~63%）；消融基线only-Center因缺少尺度变化信息而在真实场景中严重退化（S.R.降至3%~23%），单智能体S-A RL在实物扰动下表现不稳（S.R.仅20%~33%），而only-WH完全无法形成有效接取。",
+    "path": "media/paper_03_experiment.jpg",
+    "mime_type": "image/jpeg",
+    "content_id": "paper_03_experiment@ego-digest",
+    "width": 627,
+    "height": 436,
+    "bytes": 51581,
+    "sha256": "b5eda4bdc9e0765e15a79315f29ab1f65892168a49062e76d382a5bb647739f8"
+  }
+]
