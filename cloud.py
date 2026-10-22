@@ -27,31 +27,54 @@ def generate(config: dict[str, Any], prompt: str, schema: dict[str, Any], audit:
     parts = [{"type": "text", "text": prompt}]
     if pdf is not None:
         parts.append({"type": "document", "mime_type": "application/pdf", "data": base64.b64encode(pdf).decode()})
-    payload: dict[str, Any] = {
-        "model": config["model"], "input": parts, "store": False,
-        "response_format": {"type": "text", "mime_type": "application/json", "schema": schema},
-        "generation_config": {"max_output_tokens": config["max_output_tokens"],
-                              "thinking_level": config.get("thinking_level", "medium")},
-    }
-    if search:
-        payload["tools"] = [{"type": "google_search"}, {"type": "url_context"}]
+    models = list(dict.fromkeys([config["model"], *config.get("fallback_models", [])]))
+    attempts = max(1, int(config.get("api_attempts", 4)))
     endpoint = "https://generativelanguage.googleapis.com/v1beta/interactions"
     response = None
-    for attempt in range(3):
-        try:
-            request = Request(endpoint, data=json.dumps(payload).encode(),
-                              headers={"x-goog-api-key": key, "Content-Type": "application/json"}, method="POST")
-            with urlopen(request, timeout=config["api_timeout_seconds"]) as handle:
-                response = json.load(handle)
+    last_error = "Gemini returned no response"
+    transient_codes = {429, 500, 502, 503, 504}
+    for model in models:
+        payload: dict[str, Any] = {
+            "model": model, "input": parts, "store": False,
+            "response_format": {"type": "text", "mime_type": "application/json", "schema": schema},
+            "generation_config": {"max_output_tokens": config["max_output_tokens"],
+                                  "thinking_level": config.get("thinking_level", "medium")},
+        }
+        if search:
+            payload["tools"] = [{"type": "google_search"}, {"type": "url_context"}]
+        for attempt in range(attempts):
+            try:
+                request = Request(endpoint, data=json.dumps(payload).encode(),
+                                  headers={"x-goog-api-key": key, "Content-Type": "application/json"}, method="POST")
+                with urlopen(request, timeout=config["api_timeout_seconds"]) as handle:
+                    response = json.load(handle)
+                break
+            except HTTPError as exc:
+                raw = exc.read()
+                try:
+                    error = json.loads(raw).get("error", {}).get("message", "API request failed")
+                except json.JSONDecodeError:
+                    error = raw.decode(errors="replace") or "API request failed"
+                error = error.replace(key, "[redacted]")[:400]
+                last_error = f"Gemini HTTP {exc.code}: {error}"
+                if exc.code not in transient_codes:
+                    raise RuntimeError(last_error) from None
+                if attempt + 1 < attempts:
+                    retry_after = exc.headers.get("Retry-After")
+                    try:
+                        delay = float(retry_after) if retry_after is not None else 15 * (2 ** attempt)
+                    except ValueError:
+                        delay = 15 * (2 ** attempt)
+                    delay = max(5.0, min(delay, 120.0))
+                    print(f"Transient Gemini HTTP {exc.code} for {model}; retrying in {delay:.0f}s "
+                          f"(attempt {attempt + 1}/{attempts})", flush=True)
+                    time.sleep(delay)
+        if response is not None:
             break
-        except HTTPError as exc:
-            if exc.code in {429, 500, 502, 503, 504} and attempt < 2:
-                time.sleep(min(int(exc.headers.get("Retry-After", 15 * (attempt + 1))), 60))
-                continue
-            error = json.loads(exc.read()).get("error", {}).get("message", "API request failed")
-            raise RuntimeError(f"Gemini HTTP {exc.code}: {error.replace(key, '[redacted]')[:400]}") from None
+        if model != models[-1]:
+            print(f"Gemini model {model} remained unavailable; trying configured fallback model.", flush=True)
     if response is None:
-        raise RuntimeError("Gemini returned no response")
+        raise RuntimeError(last_error)
     audit.parent.mkdir(parents=True, exist_ok=True)
     core.write_json(audit, response)
     if response.get("status") != "completed":

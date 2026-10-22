@@ -6,11 +6,10 @@ on:
       timezone: America/New_York
     - cron: '30 8 * * *'
       timezone: America/New_York
-    # Additional UTC schedule entries cover EDT and EST; Python checks local deadlines.
-    # Repeated triggers skip completed work and never send a second daily issue.
-    - cron: '17 11,12 * * *'
-    - cron: '45 12,13 * * *'
-    - cron: '10 13,14 * * *'
+    # One local-time recovery trigger handles a transient morning API outage.
+    # scheduled_mode skips it after the daily receipt exists.
+    - cron: '0 9 * * *'
+      timezone: America/New_York
   workflow_dispatch:
     inputs:
       mode:

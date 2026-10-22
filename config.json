@@ -4,6 +4,8 @@
   "send_at": "08:30",
   "max_papers": 3,
   "model": "gemini-3.8-flash",
+  "fallback_models": ["gemini-3.7-flash"],
+  "api_attempts": 4,
   "api_timeout_seconds": 300,
   "max_output_tokens": 24576,
   "repository": "Yifu-Tian/daily-paper",
